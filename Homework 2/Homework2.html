@@ -226,13 +226,6 @@
             <input type="date"
                    size="15"
                    maxlength="13"
-						<script>
-							const today = new Date ();
-							const formattedToday = today.toISOString().split('T')[0];
-							const birthInput = document.getElementById('birth');
-							birthInput.min = '1905-01-01';
-							birthInput.max = formattedToday;
-						</script>
                    id="birth"
                    name="birth"
                    required
@@ -535,6 +528,13 @@
     const yy = String(today.getFullYear());
     const formattedDate = `${mm}/${dd}/${yy}`;
     document.getElementById('date').textContent = formattedDate;
+</script>
+<script>
+	const today = new Date ();
+	const formattedToday = today.toISOString().split('T')[0];
+	const birthInput = document.getElementById('birth');
+	birthInput.min = '1905-01-01';
+	birthInput.max = formattedToday;
 </script>
 </body>
 </html>
