@@ -51,7 +51,9 @@
                    name="firstname"
                    required
                    placeholder="First Name"
-				   title="minumum 2 characters; only letters, spaces, "-" and ' allowed."
+				   title="minumum 2 characters; only letters, spaces, dashes and ' allowed."
+			       oninvalid="this.setCustomValidity('First Name not valid.')"
+				   oninput="this.setCustomValidity('')"
                    
             >
             <input type="text"
