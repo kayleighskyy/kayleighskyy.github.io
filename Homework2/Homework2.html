@@ -46,7 +46,7 @@
                    size="25"
                    minlength="1"
                    maxlength="30"
-				   pattern="[A-Za-z'-]{2,}"
+				   pattern="[A-Za-z' -]{2,}"
                    id="firstname"
                    name="firstname"
                    required
@@ -65,7 +65,7 @@
                    size="25"
                    minlength="1"
                    maxlength="30"
-				   pattern="[A-Za-z0-9'-]{2,}"
+				   pattern="[A-Za-z0-9' -]{2,}"
                    id="lastname"
                    name="lastname"
                    required
@@ -528,13 +528,6 @@
     const yy = String(today.getFullYear());
     const formattedDate = `${mm}/${dd}/${yy}`;
     document.getElementById('date').textContent = formattedDate;
-</script>
-<script>
-	const today = new Date ();
-	const formattedToday = today.toISOString().split('T')[0];
-	const birthInput = document.getElementById('birth');
-	birthInput.min = '1905-01-01';
-	birthInput.max = formattedToday;
 </script>
 </body>
 </html>
