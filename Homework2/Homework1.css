@@ -131,16 +131,29 @@ table.form {
   justify-content: center;
   box-sizing: 50%;
 }
-.right-submit {
+.middle-submit {
   background-color: deeppink;
   border-color: black;
   size: 30;
   font-weight: bold;
 }
-.left-reset {
+.right-reset {
   background-color: deepskyblue;
   border-color: black;
   size: 30;
   font-weight: bold;
 }
+.left-review {
+  background-color: violet;
+  border-color: black;
+  size: 30;
+  font-weight: bold;
+}
+.review-output {
+  background-color: white;
+  border-color: violet;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
 
