@@ -7,7 +7,6 @@ Purpose: Style sheet for homework1
 */
 body {
     background-color: #ffd7ed;
-    
 }
 .page-title {
     text-align: center;
@@ -17,9 +16,6 @@ body {
     color: deepskyblue;
     outline-color: black;
     font-stretch: ultra-expanded;
-    
-    
-    
 }
 .heading {
     background-color: orange;
@@ -33,7 +29,6 @@ body {
     margin-bottom: 30px;
     max-width: 100vw;
     font-family: 'Courier New', Courier, monospace;
-    
 }
 .center {
     max-width: 1000px;
