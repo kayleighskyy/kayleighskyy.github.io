@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <!--
     Name: Kayleigh Phongvichith
     File: Homework2.html
@@ -31,7 +31,7 @@
         </div>
         <hr>
 <div class="center">
-<form action="./Thankyou.html" method="get">
+<form action="./Thankyou.html" method="get" id="wellnessform" novalidate>
     <div class="border">
     <table class="form">
     <tr class="form">
@@ -46,35 +46,36 @@
                    size="25"
                    minlength="1"
                    maxlength="30"
-				   pattern="[A-Za-z' -]{2,}"
+				   pattern="[A-Za-z' \-]{1,30}"
                    id="firstname"
-                   name="firstname"
+                   name="First Name"
                    required
                    placeholder="First Name"
-				   title="minumum 2 characters; only letters, spaces, dashes and ' allowed."
-			       oninvalid="this.setCustomValidity('First Name not valid.')"
-				   oninput="this.setCustomValidity()"
-				   
-                   
+				   title="Minumum 1 character; only letters, spaces, dashes and apostrophes allowed."
             >
+            
+            
             <input type="text"
                    size="2"
                    maxlength="1"
-				   pattern="[A-Za-z]{0,}"
+				   pattern="[A-Za-z]{0}"
                    id="middleinit"
-                   name="middleinit"
+                   name="Middle Initial"
                    placeholder="MI"
             >
+            
             <input type="text"
                    size="25"
                    minlength="1"
                    maxlength="30"
-				   pattern="[A-Za-z0-9' -]{2,}"
+				   pattern="[A-Za-z2-5' -]{1,30}"
                    id="lastname"
-                   name="lastname"
+                   name="Last Name"
                    required
                    placeholder="Last Name"
+                   title="Minumum 1 character; only letters, apostrophes, numbers (3rd), and dashes allowed."
             >
+            
         <span id="name_text"></span>
     </tr>
     <tr class="form">
@@ -84,10 +85,10 @@
         <td>
             <input type="text"
                     size="57"
-                    minlength="4"
+                    minlength="2"
                     maxlength="30"
                     id="addr1"
-                    name="addr1"
+                    name="Address 1"
                     required
                     placeholder="Street Number and Street Name"
             >
@@ -100,10 +101,10 @@
         <td>
             <input type="text"
                    size="57"
-                   minlength="4"
+                   minlength="2"
                    maxlength="30"
                    id="addr2"
-                   name="addr2"
+                   name="Address 2"
                    placeholder="Apt, Unit, Etc"
             >
         <span id="addr2_text"></span>
@@ -117,13 +118,15 @@
         <td>
             <input type="text"
                    size="20"
+                   minlength="2"
                    maxlength="30"
                    id="city"
-                   name="city"
+                   name="City"
                    required
                    placeholder="City"
             >
-            <select name="state" required>
+            <select name="State" id="state" required>
+                <option value=" " disabled selected>Select a State</option>
                 <option value="AL">Alabama</option>
 	            <option value="AK">Alaska</option>
 	            <option value="AZ">Arizona</option>
@@ -175,15 +178,16 @@
 	            <option value="WV">West Virginia</option>
 	            <option value="WI">Wisconsin</option>
 	            <option value="WY">Wyoming</option>
+                <option value="PR">Puerto Rico</option>
                 <! -- https://www.freeformatter.com/usa-state-list-html-select.html -->
             </select>
 
             <input type="text"
-                   pattern="[0-9]{5}"
+                   pattern="^\d{5}(-\d{4})?$"
                    size="13"
-                   maxlength="5"
+                   maxlength="10"
                    id="zip"
-                   name="zip"
+                   name="Zip"
                    required
                    placeholder="Zip"
             >
@@ -198,10 +202,10 @@
                 <div>
             <input type="tel"
                    size="15"
-                   maxlength="13"
+                   maxlength="12"
                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                    id="phone"
-                   name="phone"
+                   name="Phone Number"
                    required
                    placeholder="972-987-0987"
             >
@@ -213,7 +217,7 @@
                    maxlength="13"
                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                    id="work"
-                   name="work"
+                   name="Work Number"
                    placeholder="945-123-4567"
             >
                 </div>
@@ -225,30 +229,31 @@
             <label for="birth">Date of Birth</label>
         </td>
         <td>
-            <div style="display:flex; align:center; gap:125px;">
+            <div style="display:flex; align:center; gap:140px;">
                 <div>
             <input type="date"
                    size="15"
                    maxlength="13"
                    id="birth"
-                   name="birth"
+                   name="Date of Birth"
                    required
+                   title="Please select your date of birth."
             >
                 </div>
                 <div>
             <label for="ssn">SSN</label>
-            <input type="text"
+            <input type="password"
                    size="15"
                    maxlength="11"
-				   pattern="\d{3}-\d{2}-\d{4}"
+                   pattern="\d{3}-\d{2}-\d{4}"
                    id="ssn"
-                   name="ssn"
+                   name="SSN"
                    required
-                   placeholder="777-00-5555"
+                   placeholder="***-**-1234"
             >
                 </div>
-            </div>
-            <span id="birth_text"><span id="ssn_text"></span>
+            </div>  
+            <span id="birth_text"><span id="ssn_text"></span>     
     </tr>
     <tr class="form">
         <td align="right">
@@ -295,10 +300,13 @@
         <td>
             <input type="text"
                     size="57"
+                    minlength="5"
+                    maxlength="30"
+                    pattern="[A-Za-z][A-Za-z0-9_-]{5,30}"
                     id="username"
-                    name="username"
+                    name="Username"
                     required
-                    placeholder="No Special Characters"
+                    placeholder="No special characters or spaces"
             >
         <span id="username_text"></span>
         </td>
@@ -311,7 +319,7 @@
             <input type="email"
                     size="57"
                     id="email"
-                    name="email"
+                    name="Email"
                     required
                     placeholder="Emailname@example.com"
             >
@@ -325,9 +333,10 @@
         <td>
             <input type="password"
                     size="57"
-                    maxlength="8"
+                    minlength="8"
+                    maxlength="30"
                     id="password"
-                    name="password"
+                    name="Password"
                     required
                     placeholder="********"
             >
@@ -341,7 +350,7 @@
         <td>
             <div class="list">
             <ul>
-                <li> 8 Maximum Characters</li>
+                <li> 8 to 30 Characters</li>
                 <li> 1 Upper case</li>
             </ul>
             <ul>
@@ -357,9 +366,10 @@
         <td>
             <input type="password"
                     size="57"
-                    maxlength="8"
+                    minlength="8"
+                    maxlength="30"
                     id="vpass"
-                    name="vpass"
+                    name="Verify Password"
                     required
                     placeholder="********"
             >
@@ -376,7 +386,7 @@
         <div class="group">
             <input type="checkbox"
                    id="option1"
-                   name="option1"
+                   name="Checkup"
                    value="Checkup"
                    
             >
@@ -384,7 +394,7 @@
         <div class="group">
             <input  type="checkbox"
                    id="option2"
-                   name="option2"
+                   name="Vaccinations"
                    value="Vaccinations"
                    
             >
@@ -392,7 +402,7 @@
         <div class="group">
             <input type="checkbox" 
                    id="option3" 
-                   name="option3" 
+                   name="Covid-19" 
                    value="Covid-19"
                    
             >
@@ -400,7 +410,7 @@
         <div class="group">
             <input type="checkbox" 
                    id="option4" 
-                   name="option4" 
+                   name="Strep Throat" 
                    value="Strep Throat"
                    
             >
@@ -408,14 +418,14 @@
         <div class="group">
             <input type="checkbox" 
                    id="option5" 
-                   name="option5" 
+                   name="Other" 
                    value="Other (Please specify)"
                    
             >
             <label for="option5">Other (Please specify)</label>
             <input type="text"
-                   id="option5"
-                   name="option5"
+                   id="option5_textarea"
+                   name="option5_textarea"
                    size="20"
             >
         </div>
@@ -425,14 +435,14 @@
         <label for="vacc">Have you been vaccinated?</label>
             <input type="radio"
                    id="vacc-yes"
-                   name="vacc"
+                   name="Vaccinated"
                    value="Yes"
                    
             >
             <label for="vacc-yes">Yes</label>
             <input type="radio"
                    id="vacc-no"
-                   name="vacc"
+                   name="Vaccinated"
                    value="No"
                    
             >
@@ -442,14 +452,14 @@
            <label for="insurance">Do you have insurance?</label>
             <input type="radio"
                    id="insurance-yes"
-                   name="insurance"
+                   name="Insurance"
                    value="Yes"
                    
             >
             <label for="insurance-yes">Yes</label>
             <input type="radio"
                    id="insurance-no"
-                   name="insurance"
+                   name="Insurance"
                    value="No"
                    
             >
@@ -466,7 +476,7 @@
                    max="10"
                    value="50"
                    id="pain"
-                   name="pain"
+                   name="Pain Level"
                    class="slider"
                    required
             >
@@ -485,22 +495,29 @@
 <div class="align-textarea">
     <label for="detail">Please tell us any additional information you would like us to know</label>
         <textarea id="detail" 
-                  name="detial"
+                  name="Additional Information"
                   rows="4"
                   cols="50"
         >
         </textarea>
 </div>
 <div class="radio-button">
+    <input type="button"
+           id="review"
+           value="review"
+    >
     <input type="submit"
            value="Submit"
+           id="submit"
            class="right-submit"
     >
     <input type="reset"
            value="Reset"
+           id="reset"
            class="left-reset"
     >
 </div>
+<div id="reviewoutput"></div>
 </form>
 <div class="heading"></div>
 <footer>
@@ -527,12 +544,210 @@
         </div>
 </footer>
 <script>
-    const today = new Date ();
-    const mm = String(today.getMonth()+1).padStart(2,'0');
-    const dd = String(today.getDate()).padStart(2,'0');
-    const yy = String(today.getFullYear());
-    const formattedDate = `${mm}/${dd}/${yy}`;
-    document.getElementById('date').textContent = formattedDate;
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date();
+        const formattedDate = 
+            String(today.getMonth() + 1).padStart(2, '0') + '/' +
+            String(today.getDate()).padStart(2, '0') + '/' +
+            String(today.getFullYear());
+        const dateElement = document.getElementById('date');
+        if (dateElement) dateElement.textContent = formattedDate;
+
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+    
+    function setBirthLimits() {
+        const birthInput = document.getElementById('birth');
+        if (!birthInput) return;
+        const today = new Date();
+            const maxDateString = formatDate(today);
+            const minDate = new Date();
+            minDate.setFullYear(today.getFullYear() - 120);
+            const minDateString = formatDate(minDate);
+            birthInput.setAttribute('max', maxDateString);
+            birthInput.setAttribute('min', minDateString);
+            console.log(`Birth date range set from ${minDateString} to ${maxDateString}`);
+    }
+    setBirthLimits();
+
+    const form = document.getElementById('wellnessform');
+    if (!form) return;
+    const fieldsToValidate = form.querySelectorAll('input, textarea');
+
+    function validateField(inputElement) {
+        const errorSpan = document.getElementById(inputElement.id + '_text');
+        let errorMessage = '';
+        const value = inputElement.value;
+        const validity = inputElement.validity;
+
+        if (!inputElement.checkValidity()) {
+            if (!value && validity.valueMissing) {
+                errorMessage = `${inputElement.name || 'This field'} is required.`;
+            }
+            else if (value.length > 0 && value.length < inputElement.minLength){
+                errorMessage = `${inputElement.name} must be at least ${inputElement.minLength} characters long.`;
+            } 
+            else if (inputElement.pattern && value.length > 0) {
+                const regex = new RegExp(`^${inputElement.pattern}$`);
+                if (!regex.test(value)){
+                    errorMessage = inputElement.title || `Please match the required format.`;
+                }
+            }
+            else if (value.length > inputElement.maxLength){
+                errorMessage = `${inputElement.name} can only be ${inputElement.maxLength} characters long.`;
+            }
+            else if (validity.typeMismatch) {
+                errorMessage = `Please enter a valid ${inputElement.name}`;
+            }
+            if (errorSpan) {
+                 errorSpan.textContent = errorMessage;   
+            } 
+                inputElement.classList.add('invalid');
+                return false;
+            } else {
+                if (errorSpan) errorSpan.textContent = '';
+                inputElement.classList.remove('invalid');
+                return true;
+            }
+        }
+
+        fieldsToValidate.forEach(field => {
+            field.addEventListener('blur', () => validateField(field));
+            field.addEventListener('input', () => validateField(field));
+        });
+        form.addEventListener('submit', function(event) {
+            const usernameInput = document.getElementById('username');
+            if (usernameInput) usernameInput.value = usernameInput.value.toLowerCase();
+
+            const passwordInput = document.getElementById('password');
+            const confirmInput = document.getElementById('vpass');
+            const passwordError = document.getElementById('password_text');
+            const confirmError = document.getElementById('vpass_text');
+            const firstname = document.getElementById('firstname')?.value.toLowerCase() || '';
+            const lastname = document.getElementById('lastname')?.value.toLowerCase() || '';
+
+            let formIsValid = true;
+            let password = passwordInput.value;
+            let username = usernameInput.value;
+
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+.,`~<>])[A-Za-z\d!@#$%^&*()\-_=+.,`~<>]{8,30}$/;
+            if (!passwordPattern.test(password)) {
+                passwordError.textContent = 'Password must be 8-30 characters and have one uppercase and lowercase letter, a number, and one special character.';
+                formIsValid = false;
+            }
+            if (password.includes('"') || password.includes("'")) {
+                passwordError.textContent = 'Quotes are not allowed.';
+                formIsValid = false; 
+            }
+            if (password.toLowerCase().includes(username) ||
+                password.toLowerCase().includes(firstname) ||
+                password.toLowerCase().includes(lastname)) {
+                passwordError.textContent = 'Password cannot match your username or name'
+                formIsValid = false;
+            }
+            if (password !== confirmInput.value) {
+                confirmError.textContent = 'Passwords do not match';
+                formIsValid = false;
+            }
+            fieldsToValidate.forEach(field => {
+                if (!validateField(field)) formIsValid = false;
+            });
+            if (!formIsValid) {
+                event.preventDefault();
+                alert('Please review and correct the errors');
+            }
+        });
+
+    const ssnInput = document.getElementById('ssn');
+    if (ssnInput) {
+        ssnInput.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            let formattedValue = '';
+            if (value.length > 0) formattedValue += value.substring(0,3);
+            if (value.length > 3) formattedValue += '-' + value.substring(3,5);
+            if (value.length > 5) formattedValue += '-' + value.substring(5,9);
+            this.value = formattedValue;    
+        });
+    }
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            value = value.substring(0,10);
+            let formattedValue = '';
+            if (value.length > 0) formattedValue += value.substring(0,3);
+            if (value.length > 3) formattedValue += '-' + value.substring(3,6);
+            if (value.length > 6) formattedValue += '-' + value.substring(6,10);
+            this.value = formattedValue;    
+        });
+    }
+    const zipInput = document.getElementById('zip');
+    if (zipInput) {
+        zipInput.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 9) value = value.substring(0, 9);
+            if (value.length > 5) value = value.substring(0, 5) + '-' + value.substring (5);
+            this.value = value;
+        });
+    }
+    document.getElementById('review').addEventListener('click', function() {
+        const form = document.getElementById('wellnessform');
+        const output = document.getElementById('reviewoutput');
+        output.innerHTML = '';
+        const handledRadioGroups = new Set();
+
+        Array.from(form.elements).forEach(element => {
+            if (['button', 'submit', 'reset'].includes(element.type)) return;
+
+            let value = '';
+            let validationMessage = '';
+
+            if (element.type === 'radio') {
+                if (handledRadioGroups.has(element.name)) return;
+                const selected = form.querySelector(`input[name="${element.name}"]:checked`);
+                if (!selected) return;
+                value = selected.value;
+                handledRadioGroups.add(element.name);
+
+            }else if (element.type === 'checkbox') {
+                if (!element.checked) return;
+                value = 'Checked';
+
+            } else {
+                value = element.value.trim();
+                if (!value) return;
+            
+            if (['text', 'password', 'textarea', 'number', 'tel', 'email'].includes(element.type)){
+                if (element.minLength > 0 && value.length < element.minLength) {
+                    validationMessage = `error (min length ${element.minLength})`;
+            } else if (element.maxLength > 0 && value.length > element.maxLength) {
+                validationMessage = `error (max length ${element.maxLength})`;
+            } else if (element.pattern) {
+                const regex = new RegExp(`^${element.pattern}$`);
+                if (!regex.test(value)) validationMessage = 'error (invalid format)';
+            }
+        } 
+            if (element.id === 'vpass') {
+                const passwordElement = document.getElementById('password');
+                if (value !== passwordElement.value) validationMessage = 'error (password does not match)';
+            }
+        }
+            const displayValue = (element.type === 'password') ? '*'.repeat(value.length) : value;
+            const line = document.createElement('div');
+
+            line.textContent = validationMessage 
+                    ? `${element.name || element.id} : ${displayValue} -> ${validationMessage}` 
+                    : `${element.name || element.id} : ${displayValue}`;
+
+            line.style.color = validationMessage.startsWith('error') ? 'red' : 'green';
+            output.appendChild(line);
+        });
+    });
+});
 </script>
 </body>
 </html>
