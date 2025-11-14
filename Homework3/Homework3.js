@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (validity.valueMissing) {
                 errorMessage = `${inputElement.name || 'This field'} is required.`;
             }
-            else if (inputElement.minLength > 0 && value.length < inputElement.minLength){
+            else if (value.length > 0 && inputElement.minLength > 0 && value.length < inputElement.minLength){
                 errorMessage = `${inputElement.name} must be at least ${inputElement.minLength} characters long.`;
             } 
             else if (inputElement.pattern && value.length > 0) {
