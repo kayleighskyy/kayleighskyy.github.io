@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (validity.valueMissing) {
                 errorMessage = `${inputElement.name || 'This field'} is required.`;
             }
-            else if (inputElement.minlength > 0 && value.length < inputElement.minLength){
+            else if (inputElement.minLength > 0 && value.length < inputElement.minLength){
                 errorMessage = `${inputElement.name} must be at least ${inputElement.minLength} characters long.`;
             } 
             else if (inputElement.pattern && value.length > 0) {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     errorMessage = inputElement.title || `Invalid format for ${inputElement.name}.`;
                 }
             }
-            else if (inputElement.maxlength > 0 && value.length > inputElement.maxLength){
+            else if (inputElement.maxLength > 0 && value.length > inputElement.maxLength){
                 errorMessage = `${inputElement.name} can only be ${inputElement.maxLength} characters long.`;
             }
             else if (validity.typeMismatch) {
