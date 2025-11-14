@@ -229,4 +229,19 @@ document.addEventListener('DOMContentLoaded', function() {
     slider.oninput = function() {
         output.innerHTML = this.value;
     }
+    const submitButton = document.getElementById('submit);
+    function updateSubmitButton() {
+        let allValid = true;
+
+        fieldsToValidate.forEach(field => {
+            if (!validateField(field)) allValid = false;
+        });
+        submitButton.disabled = !allValid;
+    }
+    fieldsToValidate.forEach(field => {
+        field.addEventListener('input', updateSubmitButton);
+        field.addEventListener('change', updateSubmitButton);
+    });
+    updateSubmitButton();
+                                                 
 });
