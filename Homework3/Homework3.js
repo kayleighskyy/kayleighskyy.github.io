@@ -79,18 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
             if (!passwordInput || !confirmInput || !passwordError || !confirmError) return true;
 
-                let password = passwordInput.value.trim();
-                let confirmPassword = confirmInput.value.trim();
-
-            if (password === '') {
-                passwordError.textContent = '';
-                passwordInput.classList.remove('invalid');
-            if (confirmPassword === '') {
-                confirmError.textContent = '';
-                confirmInput.classList.remove('invalid');
-            }
-                return true;
-            }
+                let passwordIsValid = true;
+                let password = passwordInput.value;
+                let confirmPassword = confirmInput.value;
             
                 passwordError.textContent = '';
                 confirmError.textContent = '';
@@ -288,22 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let allValid = true;
 
         fieldsToValidate.forEach(field => {
-            if(!field.checkValidity()) {
-                if (field.id !== 'password' && field.id !== 'vpass') {
-                    if (field.validity.valueMissing) {
-                        allValid = false;
-                    }
-                    else if (!validateField(field)) {
-                        allValid = false;
-                    }
-                }
-            }
-        });
-
-        fieldsToValidate.forEach(field => {
-            if (field.id !== 'password' && field.id !== 'vpass') {
-                if (!validateField(field)) allValid = false;
-            }
+            if (!field.checkValidity()) allValid = false;
         });
         if (!validatePasswordFields()) allValid = false; 
         const radios = form.querySelectorAll('input[type="radio"]');
