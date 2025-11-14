@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (!passwordInput || !confirmInput || !passwordError || !confirmError) return true;
 
-                let formIsValid = true;
+                let passwordIsValid = true;
                 let password = passwordInput.value;
                 let confirmPassword = confirmInput.value;
 
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (radioGroups.has(radio.name)) return;
             radioGroups.add(radio.name);
             const selected = form.querySelector(`input[name="${radio.name}"]:checked`);
-            const isRequired = radio.hasAttribute('required') || (radio.closest('.radio-group') && radio.closest('.radio-group').hasAttribute('data-required'));
+            const isRequired = radio.hasAttribute('required');
             if (isRequired && !selected) allValid = false;
         });
         const checkboxes = form.querySelectorAll(`input[type="checkbox"][required]`);
