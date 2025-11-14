@@ -83,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fieldsToValidate.forEach(field => {
             field.addEventListener('blur', () => validateField(field));
             field.addEventListener('input', () => validateField(field));
+            field.addEventListener('change', () => validateField(field));
         });
         form.addEventListener('submit', function(event) {
             const usernameInput = document.getElementById('username');
@@ -261,9 +262,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-        document.getElementById('firstname')?.addEventListner('blur', updateNameDisplay);
-        doucment.getElementById('middleinit')?.addEventListner('blur', updateNameDisplay);
-        document.getElementById('lastname')?.addEventListner('blur', updatNameDisplay);
+        document.getElementById('firstname')?.addEventListener('blur', updateNameDisplay);
+        doucment.getElementById('middleinit')?.addEventListener('blur', updateNameDisplay);
+        document.getElementById('lastname')?.addEventListener('blur', updatNameDisplay);
 
     function updateLocationDisplay() {
         const city = docuemnt.getElementById('city')?.value.trim() || '';
@@ -285,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-        document.getElementById('city')?.addEventListner('blur', updateLocationDisplay);
-        doucment.getElementById('state')?.addEventListner('change', updateLocationDisplay);
-        document.getElementById('zip')?.addEventListner('blur', updateLocationDisplay);
+        document.getElementById('city')?.addEventListener('blur', updateLocationDisplay);
+        doucment.getElementById('state')?.addEventListener('change', updateLocationDisplay);
+        document.getElementById('zip')?.addEventListener('blur', updateLocationDisplay);
 });
