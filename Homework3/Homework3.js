@@ -288,8 +288,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (radioGroups.has(radio.name)) return;
             radioGroups.add(radio.name);
             const selected = form.querySelector(`input[name="${radio.name}"]:checked`);
-            const isRequired = radio.hasAttribute('required');
-            if (isRequired && !selected) allValid = false;
+            const isRequired = form.querySelector(`input[name="${radio.name}"][required]`);
+            if (isRequired && !selected) {
+                allValid = false;
+            }
         });
         const checkboxes = form.querySelectorAll(`input[type="checkbox"][required]`);
         checkboxes.forEach(cb => {
