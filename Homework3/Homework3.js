@@ -263,11 +263,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
         document.getElementById('firstname')?.addEventListener('blur', updateNameDisplay);
-        doucment.getElementById('middleinit')?.addEventListener('blur', updateNameDisplay);
-        document.getElementById('lastname')?.addEventListener('blur', updatNameDisplay);
+        document.getElementById('middleinit')?.addEventListener('blur', updateNameDisplay);
+        document.getElementById('lastname')?.addEventListener('blur', updateNameDisplay);
 
     function updateLocationDisplay() {
-        const city = docuemnt.getElementById('city')?.value.trim() || '';
+        const city = document.getElementById('city')?.value.trim() || '';
         const stateSelect = docuemnt.getElementById('state');
         const state = stateSelect?.options[stateSelect.selectedIndex]?.text.trim() || '';
         const zip = docuemnt.getElementById('zip')?.value.trim() || '';
@@ -287,6 +287,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
         document.getElementById('city')?.addEventListener('blur', updateLocationDisplay);
-        doucment.getElementById('state')?.addEventListener('change', updateLocationDisplay);
+        document.getElementById('state')?.addEventListener('change', updateLocationDisplay);
         document.getElementById('zip')?.addEventListener('blur', updateLocationDisplay);
 });
