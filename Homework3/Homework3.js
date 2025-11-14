@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('wellnessform');
     if (!form) return;
     const fieldsToValidate = form.querySelectorAll('input, textarea');
+    const submitButton = document.getElementById('submit');
 
     function validateField(inputElement) {
         const errorSpan = document.getElementById(inputElement.id + '_text');
@@ -67,14 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return true;
             }
 
-        fieldsToValidate.forEach(field => {
-            field.addEventListener('blur', () => validateField(field));
-            field.addEventListener('input', () => validateField(field));
-        });
-        form.addEventListener('submit', function(event) {
+        function validatePasswordFields() {
             const usernameInput = document.getElementById('username');
-            if (usernameInput) usernameInput.value = usernameInput.value.toLowerCase();
-
             const passwordInput = document.getElementById('password');
             const confirmInput = document.getElementById('vpass');
             const passwordError = document.getElementById('password_text');
@@ -82,9 +77,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const firstname = document.getElementById('firstname')?.value.toLowerCase() || '';
             const lastname = document.getElementById('lastname')?.value.toLowerCase() || '';
 
+            if (!passwordInput || !confirmInput || !passwordError || !confirmError) return true;
+
                 let formIsValid = true;
                 let password = passwordInput.value;
                 let confirmPassword = confirmInput.value;
+
+                passwordError.textContent = '';
+                confirmError.textContent = '';
+                passwordInput.classList.remove('invalid');
+                confirmInput.classList.remove('invalid');
 
                 const lowerPassword = password.toLowerCase();
                 const lowerUsername = usernameInput?.value.toLowerCase() || '';
@@ -93,38 +95,74 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+.,`~<>])[A-Za-z\d!@#$%^&*()\-_=+.,`~<>]{8,30}$/;
 
-                passwordError.textContent = '';
-                confirmError.textContent = '';
-
                 if (!passwordPattern.test(password)) {
                     passwordError.textContent = 'Password must be 8 to 30 characters and have at least one uppercase, lowercase, number, and special character.';
-                    formIsValid = false;
+                    passwordInput.classList.add('invalid');
+                    passwordIsValid = false;
                 }
                 if (password.includes('"') || password.includes("'")) {
-                    passwordError.textContent = 'Qoutes are not allowed.';
-                    formIsValid = false;
+                    if (passwordIsValid) passwordError.textContent = 'Qoutes are not allowed.';
+                    passwordInput.classList.add('invalid');
+                    passwordIsValid = false;
                 }
                 if (
                     lowerPassword.includes(lowerUsername) ||
                     lowerPassword.includes(lowerFirstname) ||
                     lowerPassword.includes(lowerLastname)
                 ) {
-                    passwordError.textContent = 'Password cannot contain your username or name.';
-                    formIsValid = false;
+                    if (passwordIsValid) passwordError.textContent = 'Password cannot contain your username or name.';
+                    passwordInput.classList.add('invalid');
+                    passwordIsValid = false;
                 }
                 if (password !== confirmPassword) {
                     confirmError.textContent = 'Passwords do not match.';
-                    formIsValid = false;
+                    confirmInput.classList.add('invalid');
+                    passwordIsValid = false;
                 }
-            fieldsToValidate.forEach(field => {
-                if (!validateField(field)) formIsValid = false;
-            });
-            if (!formIsValid) {
-                event.preventDefault();
-                alert('Please review and correct the errors');
-            }
+                return passwordIsValid;
+        }
+           
+     fieldsToValidate.forEach(field => {
+            field.addEventListener('blur', () => {
+                validateField(field); updateSubmitButton();
+         });
+            field.addEventListener('input', () => {
+                validateField(field) updateSubmitButton();
+        });
+            field.addEventListener('change', updateSubmitButton);
         });
 
+    form.addEventListener('submit', function(event) {
+        const usernameInput = document.getElementById('username');
+        if (usernameInput) usernameInput.value = usernameInput.value.toLowerCase();
+
+        let formIsValid = true;
+
+        fieldsToValidate.forEach(field => {
+            if (!validateField(field)) formIsValid = false;
+        });
+        if (!validatePasswordFields()) formIsValid = false;
+        const radios = form.querySelectorAll('input[type="radio"]');
+        const radioGroups = new Set ();
+        radios.forEach(radio => {
+            if (radioGroups.has(radio.name)) return;
+            radioGroups.add(radio.name);
+            const selected = form.querySelector(`input[name="${radio.name}"]:checked`);
+            if (!selected) formIsValid = false;
+        });
+        const checkboxes = form.querySelectorAll(`input[type="checkbox"][required]`);
+        checkboxes.forEach(cb => {
+            if (!cb.checked) formIsValid = false;
+        });
+        const selects = form.querySelectorAll('select[required]');
+        selects.forEach(sel => {
+            if (!sel.checked) formIsValid = false;
+        });
+        if (!formIsValid) {
+            event.preventDefault();
+            alert('Please review errors and correct before submitting the form.');
+        });
+    
     const ssnInput = document.getElementById('ssn');
     if (ssnInput) {
         ssnInput.addEventListener('input', function() {
@@ -223,6 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const errorSpan = document.getElementById(field.id + '_text');
                 if (errorSpan) errorSpan.textContent = '';
             });
+            updateSubmitButton();
         });
     }
     var slider = document.getElementById("pain");
@@ -231,21 +270,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     slider.oninput = function() {
         output.innerHTML = this.value;
+        updateSubmitButton();
     }
-    const submitButton = document.getElementById('submit');
+
     function updateSubmitButton() {
+        if (!submitButton) return;
         let allValid = true;
 
         fieldsToValidate.forEach(field => {
             if (!validateField(field)) allValid = false;
         });
+        if (!validatePasswordFields()) allValid = false; 
         const radios = form.querySelectorAll('input[type="radio"]');
         const radioGroups = new Set();
         radios.forEach(radio => {
             if (radioGroups.has(radio.name)) return;
             radioGroups.add(radio.name);
             const selected = form.querySelector(`input[name="${radio.name}"]:checked`);
-            if (!selected) allValid = false;
+            const isRequired = radio.hasAttribute('required') || (radio.closest('.radio-group') && radio.closest('.radio-group').hasAttribute('data-required'));
+            if (isRequired && !selected) allValid = false;
         });
         const checkboxes = form.querySelectorAll(`input[type="checkbox"][required]`);
         checkboxes.forEach(cb => {
@@ -255,12 +298,15 @@ document.addEventListener('DOMContentLoaded', function() {
         selects.forEach(sel => {
             if (!sel.value) allValid = false;
         });
-        submitButton.disabled = !allValid;
+
+    submitButton.disabled = !allValid;
+    if (submitButton.disabled) {
+        submitButton.classList.add('disabled-button-style');
     }
-    fieldsToValidate.forEach(field => {
-        field.addEventListener('input', updateSubmitButton);
-        field.addEventListener('change', updateSubmitButton);
-    });
+    else {
+        submitButton.classList.remove('disabled-button-style');
+    }
+}
     form.querySelectorAll('input[type="radio"]').forEach (radio => {
         radio.addEventListener('change', updateSubmitButton);
     });
