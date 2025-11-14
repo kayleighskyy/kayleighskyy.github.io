@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let allValid = true;
 
         fieldsToValidate.forEach(field => {
-            if (field.id !== 'password' && field !== 'vpass') {
+            if (field.id !== 'password' && field.id !== 'vpass') {
                 if (!validateField(field)) allValid = false;
             }
         });
