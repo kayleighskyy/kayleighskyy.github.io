@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
     slider.oninput = function() {
         output.innerHTML = this.value;
     }
-    const submitButton = document.getElementById('submit);
+    const submitButton = document.getElementById('submit');
     function updateSubmitButton() {
         let allValid = true;
 
