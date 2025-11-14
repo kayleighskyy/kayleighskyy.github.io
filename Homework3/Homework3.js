@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let allValid = true;
 
         fieldsToValidate.forEach(field => {
-            if (!validateField(field)) allValid = false;
+            if (!field.checkValidity()) allValid = false;
         });
         if (!validatePasswordFields()) allValid = false; 
         const radios = form.querySelectorAll('input[type="radio"]');
@@ -303,12 +303,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     submitButton.disabled = !allValid;
-    if (submitButton.disabled) {
-        submitButton.classList.add('disabled-button-style');
-    }
-    else {
-        submitButton.classList.remove('disabled-button-style');
-    }
+    submitButton.classList.toggle('disabled-button-style', !allValid);
+    
 }
     form.querySelectorAll('input[type="radio"]').forEach (radio => {
         radio.addEventListener('change', updateSubmitButton);
