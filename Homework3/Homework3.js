@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (radioGroups.has(radio.name)) return;
                 radioGroups.add(radio.name);
                 const selected = form.querySelector(`input[name="${radio.name}"]:checked`);
-                const isRequired = form.querySelector(`input[name"${radio.name}"][required]`);
+                const isRequired = form.querySelector(`input[name="${radio.name}"][required]`);
                 if (isRequired && !selected) {
                     allValid = false;
             }
