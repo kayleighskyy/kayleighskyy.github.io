@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 confirmError.textContent = '';
                 passwordInput.classList.remove('invalid');
                 confirmInput.classList.remove('invalid');
-                return = true;
+                return true;
             }
 
                 let passwordIsValid = true;
