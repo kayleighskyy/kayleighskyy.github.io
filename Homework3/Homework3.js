@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateNameDisplay() {
         const firstname = document.getElementById('firstname')?.value.trim() || '';
-        const middleinit = document.getElementById('middleinit')?.value.trim() || '':
+        const middleinit = document.getElementById('middleinit')?.value.trim() || '';
         const lastname = document.getElementById('lastname')?.value.trim() || '';
         const nameTextSpan = document.getElementById('name_text');
 
@@ -268,10 +268,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateLocationDisplay() {
         const city = document.getElementById('city')?.value.trim() || '';
-        const stateSelect = docuemnt.getElementById('state');
+        const stateSelect = document.getElementById('state');
         const state = stateSelect?.options[stateSelect.selectedIndex]?.text.trim() || '';
-        const zip = docuemnt.getElementById('zip')?.value.trim() || '';
-        const locationTextSpan = docuemnt.getElementById('city_text');
+        const zip = document.getElementById('zip')?.value.trim() || '';
+        const locationTextSpan = document.getElementById('city_text');
 
         let fullLocation = `${city}  ${state} ${zip}`.replace(/\s+/g, ' ').trim();
         if (fullLocation.endsWith(',')) fullLocation = fullLocation.slice(0, -1);
