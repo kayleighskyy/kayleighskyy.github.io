@@ -34,20 +34,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function validateField(inputElement) {
         const errorSpan = document.getElementById(inputElement.id + '_text');
-        const value = inputElement.value.trim();
         let errorMessage = '';
+        const value = inputElement.value;
+        const validity = inputElement.validity;
 
         if (!inputElement.checkValidity()) {
-            const validity = inputElement.validity;
-            
-            if (validity.valueMissing) {
+            if (!value && validity.valueMissing) {
                 errorMessage = `${inputElement.name || 'This field'} is required.`;
             }
-            else if (validity.tooShort){
+            else if (value.length > 0 && value.length < inputElement.minLength){
                 errorMessage = `${inputElement.name} must be at least ${inputElement.minLength} characters long.`;
             } 
-            else if (validity.patternMismatch && value.length > 0) {
-                errorMessage = inputElement.title || `Please match the required format.`;
+            else if (inputElement.pattern && value.length > 0) {
+                const regex = new RegExp(`^${inputElement.pattern}$`);
+                if (!regex.test(value)){
+                    errorMessage = inputElement.title || `Please match the required format.`;
+                }
             }
             else if (value.length > inputElement.maxLength){
                 errorMessage = `${inputElement.name} can only be ${inputElement.maxLength} characters long.`;
@@ -55,35 +57,21 @@ document.addEventListener('DOMContentLoaded', function() {
             else if (validity.typeMismatch) {
                 errorMessage = `Please enter a valid ${inputElement.name}`;
             }
-            
             if (errorSpan) {
                  errorSpan.textContent = errorMessage;   
-                 errorSpan.style.color = 'red';
             } 
-            else {
-                if (['firstname', 'middleinit', 'lastname', 'city', 'zip'].includes(inputElement.id)) {
+                inputElement.classList.add('invalid');
+                return false;
             } else {
                 if (errorSpan) errorSpan.textContent = '';
                 inputElement.classList.remove('invalid');
                 return true;
             }
         }
-            let displayValue = value;
-            if (inputElement.type === 'password') {
-                displayValue = '*'.repeat(value.length) + ' (Accepted) ';
-            }
-            if (errorSpan) {
-                errorSpan.textContent = displayVale;
-                errorSpan.style.color = 'green';
-            }
-            inputElement.classList.remove('invaild');
-            return true;
-        }
 
         fieldsToValidate.forEach(field => {
             field.addEventListener('blur', () => validateField(field));
             field.addEventListener('input', () => validateField(field));
-            field.addEventListener('change', () => validateField(field));
         });
         form.addEventListener('submit', function(event) {
             const usernameInput = document.getElementById('username');
@@ -243,50 +231,4 @@ document.addEventListener('DOMContentLoaded', function() {
     slider.oninput = function() {
         output.innerHTML = this.value;
     }
-
-    function updateNameDisplay() {
-        const firstname = document.getElementById('firstname')?.value.trim() || '';
-        const middleinit = document.getElementById('middleinit')?.value.trim() || '';
-        const lastname = document.getElementById('lastname')?.value.trim() || '';
-        const nameTextSpan = document.getElementById('name_text');
-
-        let fullname = `${firstname} ${middleinit} ${lastname}`.replace(/\s+/g, ' ').trim();
-
-        if (nameTextSpan) {
-            if (fullname) {
-                nameTextSpan.textContent = fullname;
-                nameTextSpan.style.color = 'green';
-            } 
-            else {
-                nameTextSpan.textContent = '';
-            }
-        }
-    }
-        document.getElementById('firstname')?.addEventListener('blur', updateNameDisplay);
-        document.getElementById('middleinit')?.addEventListener('blur', updateNameDisplay);
-        document.getElementById('lastname')?.addEventListener('blur', updateNameDisplay);
-
-    function updateLocationDisplay() {
-        const city = document.getElementById('city')?.value.trim() || '';
-        const stateSelect = document.getElementById('state');
-        const state = stateSelect?.options[stateSelect.selectedIndex]?.text.trim() || '';
-        const zip = document.getElementById('zip')?.value.trim() || '';
-        const locationTextSpan = document.getElementById('city_text');
-
-        let fullLocation = `${city}  ${state} ${zip}`.replace(/\s+/g, ' ').trim();
-        if (fullLocation.endsWith(',')) fullLocation = fullLocation.slice(0, -1);
-
-        if (locationTextSpan) {
-            if (fullLocation.length > 3) {
-                locationTextSpan.textContent = fullLocation;
-                locationTextSpan.style.color = 'green';
-            }
-            else {
-                locationTextSpan.textContent = '';
-            }
-        }
-    }
-        document.getElementById('city')?.addEventListener('blur', updateLocationDisplay);
-        document.getElementById('state')?.addEventListener('change', updateLocationDisplay);
-        document.getElementById('zip')?.addEventListener('blur', updateLocationDisplay);
 });
