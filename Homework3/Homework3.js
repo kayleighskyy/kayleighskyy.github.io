@@ -133,7 +133,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (value.length > 0) formattedValue += value.substring(0,3);
             if (value.length > 3) formattedValue += '-' + value.substring(3,5);
             if (value.length > 5) formattedValue += '-' + value.substring(5,9);
-            this.value = formattedValue;    
+            this.value = formattedValue; 
+            updateSubmitButton();
         });
     }
     const phoneInput = document.getElementById('phone');
@@ -145,7 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (value.length > 0) formattedValue += value.substring(0,3);
             if (value.length > 3) formattedValue += '-' + value.substring(3,6);
             if (value.length > 6) formattedValue += '-' + value.substring(6,10);
-            this.value = formattedValue;    
+            this.value = formattedValue;   
+            updateSubmitButton();
         });
     }
     const zipInput = document.getElementById('zip');
@@ -155,6 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (value.length > 9) value = value.substring(0, 9);
             if (value.length > 5) value = value.substring(0, 5) + '-' + value.substring (5);
             this.value = value;
+            updateSubmitButton();
         });
     }
     document.getElementById('review').addEventListener('click', function() {
@@ -236,11 +239,36 @@ document.addEventListener('DOMContentLoaded', function() {
         fieldsToValidate.forEach(field => {
             if (!validateField(field)) allValid = false;
         });
+        const radios = form.querySelectorAll('input[type="radio"]');
+        const radioGroups = new Set();
+        radios.forEach(radio => {
+            if (radioGroups.has(radio.name)) return;
+            radioGroups.add(radio.name);
+            const selected = form.querySelector(`input[name="${radio.name}"]:checked`);
+            if (!selected) allValid = false;
+        });
+        const checkboxes = form.querySelectorAll(`input[type="checkbox"][required]`);
+        checkboxes.forEach(cb => {
+            if (!cb.checked) allValid = false;
+        });
+        const selects = from.querySelectorAll('select[required]');
+        selects.forEach(sel => {
+            if (!sel.value) allValid = false;
+        });
         submitButton.disabled = !allValid;
     }
     fieldsToValidate.forEach(field => {
         field.addEventListener('input', updateSubmitButton);
         field.addEventListener('change', updateSubmitButton);
+    });
+    form.querySelectorAll('input[type="radio"]').forEach (radio => {
+        radio.addEventListener('change', updateSubmitButton);
+    });
+    form.querySelectAll('input[type="checkbox"]').forEach (cb => {
+        cb.addEventListener('change', updateSubmitButton);
+    });
+    form.querySelectorAll('select').forEach (sel => {
+        sel.addEventListener('change', updateSubmitButton);
     });
     updateSubmitButton();
                                                  
