@@ -165,26 +165,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     
     const ssnInput = document.getElementById('ssn');
-    let realSNN = "";
+    if (ssnInput) {
         ssnInput.addEventListener('input', function() {
-            let digits = this.value.replace(/\D/g, "").substring(0,9);
-            realSNN = digits;
-            let last4 = digits.substring(Math.max(0, digits.length - 4));
-            if (last4.length === 0) {
-                this.value = "***-**-";
-            }
-            else if (last4.length === 1) {
-                this.value = "***-**-" + last4;
-            }
-            else if (last4.length === 2) {
-                this.value = "***-**-" + last4;
-            }
-            else if (last4.length === 3) {
-                this.value = "***-**-" + last4;
-            }
-            else if (last4.length === 4) {
-                this.value = "***-**-" + last4;
-            }
+            let value = this.value.replace(/\D/g, '');
+            let formattedValue = '';
+            if (value.length > 0) formattedValue += value.substring(0,3);
+            if (value.length > 3) formattedValue += '-' + value.substring(3,5);
+            if (value.length > 5) formattedValue += '-' + value.substring(5,9);
+            this.value = formattedValue; 
             updateSubmitButton();
         });
     }
