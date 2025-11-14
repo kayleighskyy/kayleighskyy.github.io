@@ -288,7 +288,9 @@ document.addEventListener('DOMContentLoaded', function() {
         let allValid = true;
 
         fieldsToValidate.forEach(field => {
-            if (!field.checkValidity()) allValid = false;
+            if (field.id !== 'password' && field !== 'vpass') {
+                if (!validateField(field)) allValid = false;
+            }
         });
         if (!validatePasswordFields()) allValid = false; 
         const radios = form.querySelectorAll('input[type="radio"]');
