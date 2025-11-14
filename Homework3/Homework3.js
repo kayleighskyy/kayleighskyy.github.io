@@ -34,22 +34,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function validateField(inputElement) {
         const errorSpan = document.getElementById(inputElement.id + '_text');
+        const value = inputElement.value.trim();
         let errorMessage = '';
-        const value = inputElement.value;
-        const validity = inputElement.validity;
 
         if (!inputElement.checkValidity()) {
-            if (!value && validity.valueMissing) {
+            const validity = inputElement.validity;
+            
+            if (validity.valueMissing) {
                 errorMessage = `${inputElement.name || 'This field'} is required.`;
             }
-            else if (value.length > 0 && value.length < inputElement.minLength){
+            else if (validity.tooShort){
                 errorMessage = `${inputElement.name} must be at least ${inputElement.minLength} characters long.`;
             } 
-            else if (inputElement.pattern && value.length > 0) {
-                const regex = new RegExp(`^${inputElement.pattern}$`);
-                if (!regex.test(value)){
-                    errorMessage = inputElement.title || `Please match the required format.`;
-                }
+            else if (validity.patternMismatch && value.length > 0) {
+                errorMessage = inputElement.title || `Please match the required format.`;
             }
             else if (value.length > inputElement.maxLength){
                 errorMessage = `${inputElement.name} can only be ${inputElement.maxLength} characters long.`;
@@ -57,16 +55,29 @@ document.addEventListener('DOMContentLoaded', function() {
             else if (validity.typeMismatch) {
                 errorMessage = `Please enter a valid ${inputElement.name}`;
             }
+            
             if (errorSpan) {
                  errorSpan.textContent = errorMessage;   
+                 errorSpan.style.color = 'red';
             } 
-                inputElement.classList.add('invalid');
-                return false;
+            else {
+                if (['firstname', 'middleinit', 'lastname', 'city', 'zip'].includes(inputElement.id)) {
             } else {
                 if (errorSpan) errorSpan.textContent = '';
                 inputElement.classList.remove('invalid');
                 return true;
             }
+        }
+            let displayValue = value;
+            if (inputElement.type === 'password') {
+                displayValue = '*'.repeat(value.length) + ' (Accepted) ';
+            }
+            if (errorSpan) {
+                errorSpan.textContent = displayVale;
+                errorSpan.style.color = 'green';
+            }
+            inputElement.classList.remove('invaild');
+            return true;
         }
 
         fieldsToValidate.forEach(field => {
@@ -231,4 +242,50 @@ document.addEventListener('DOMContentLoaded', function() {
     slider.oninput = function() {
         output.innerHTML = this.value;
     }
+
+    function updateNameDisplay() {
+        const firstname = document.getElementById('firstname')?.value.trim() || '';
+        const middleinit = document.getElementById('middleinit')?.value.trim() || '':
+        const lastname = document.getElementById('lastname')?.value.trim() || '';
+        const nameTextSpan = document.getElementById('name_text');
+
+        let fullname = `${firstname} ${middleinit} ${lastname}`.replace(/\s+/g, ' ').trim();
+
+        if (nameTextSpan) {
+            if (fullname) {
+                nameTextSpan.textContent = fullname;
+                nameTextSpan.style.color = 'green';
+            } 
+            else {
+                nameTextSpan.textContent = '';
+            }
+        }
+    }
+        document.getElementById('firstname')?.addEventListner('blur', updateNameDisplay);
+        doucment.getElementById('middleinit')?.addEventListner('blur', updateNameDisplay);
+        document.getElementById('lastname')?.addEventListner('blur', updatNameDisplay);
+
+    function updateLocationDisplay() {
+        const city = docuemnt.getElementById('city')?.value.trim() || '';
+        const stateSelect = docuemnt.getElementById('state');
+        const state = stateSelect?.options[stateSelect.selectedIndex]?.text.trim() || '';
+        const zip = docuemnt.getElementById('zip')?.value.trim() || '';
+        const locationTextSpan = docuemnt.getElementById('city_text');
+
+        let fullLocation = `${city}  ${state} ${zip}`.replace(/\s+/g, ' ').trim();
+        if (fullLocation.endsWith(',')) fullLocation = fullLocation.slice(0, -1);
+
+        if (locationTextSpan) {
+            if (fullLocation.length > 3) {
+                locationTextSpan.textContent = fullLocation;
+                locationTextSpan.style.color = 'green';
+            }
+            else {
+                locationTextSpan.textContent = '';
+            }
+        }
+    }
+        document.getElementById('city')?.addEventListner('blur', updateLocationDisplay);
+        doucment.getElementById('state')?.addEventListner('change', updateLocationDisplay);
+        document.getElementById('zip')?.addEventListner('blur', updateLocationDisplay);
 });
