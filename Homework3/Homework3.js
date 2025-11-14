@@ -165,9 +165,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     
     const ssnInput = document.getElementById('ssn');
-    if (ssnInput) {
+    let realSNN = "";
         ssnInput.addEventListener('input', function() {
             let digits = this.value.replace(/\D/g, "").substring(0,9);
+            realSNN = digits;
             let last4 = digits.substring(Math.max(0, digits.length - 4));
             if (last4.length === 0) {
                 this.value = "***-**-";
