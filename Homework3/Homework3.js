@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 validateField(field); updateSubmitButton();
          });
             field.addEventListener('input', () => {
-                validateField(field) updateSubmitButton();
+                validateField(field); updateSubmitButton();
         });
             field.addEventListener('change', updateSubmitButton);
         });
@@ -161,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!formIsValid) {
             event.preventDefault();
             alert('Please review errors and correct before submitting the form.');
+        }
         });
     
     const ssnInput = document.getElementById('ssn');
@@ -294,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
         checkboxes.forEach(cb => {
             if (!cb.checked) allValid = false;
         });
-        const selects = from.querySelectorAll('select[required]');
+        const selects = form.querySelectorAll('select[required]');
         selects.forEach(sel => {
             if (!sel.value) allValid = false;
         });
