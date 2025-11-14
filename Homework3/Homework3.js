@@ -74,52 +74,52 @@ document.addEventListener('DOMContentLoaded', function() {
             const confirmInput = document.getElementById('vpass');
             const passwordError = document.getElementById('password_text');
             const confirmError = document.getElementById('vpass_text');
+            const firstname = document.getElementById('firstname')?.value.toLowerCase() || '';
+            const lastname = document.getElementById('lastname')?.value.toLowerCase() || '';
         
-
             if (!passwordInput || !confirmInput || !passwordError || !confirmError) return true;
 
-                const password = passwordInput.value.trim();
-                const confirmPassword = confirmInput.value.trim();
-
+                let passwordIsValid = true;
+                let password = passwordInput.value;
+                let confirmPassword = confirmInput.value;
+            
                 passwordError.textContent = '';
                 confirmError.textContent = '';
                 passwordInput.classList.remove('invalid');
                 confirmInput.classList.remove('invalid');
-
-                if (password === '' && confirmPassword === '') return true;
-                let valid = true;
-                const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+.,`~<>])[A-Za-z\d!@#$%^&*()\-_=+.,`~<>]{8,30}$/;
             
                 const lowerPassword = password.toLowerCase();
                 const lowerUsername = usernameInput?.value.toLowerCase() || '';
                 const lowerFirstname = firstname.toLowerCase();
                 const lowerLastname = lastname.toLowerCase();
+            
+                const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+.,`~<>])[A-Za-z\d!@#$%^&*()\-_=+.,`~<>]{8,30}$/;
 
-                if (!Pattern.test(password)) {
+                if (!passwordPattern.test(password)) {
                     passwordError.textContent = 'Password must be 8 to 30 characters and have at least one uppercase, lowercase, number, and special character.';
                     passwordInput.classList.add('invalid');
-                    Valid = false;
+                    passwordIsValid = false;
                 }
                 if (password.includes('"') || password.includes("'")) {
-                    if (Valid) passwordError.textContent = 'Qoutes are not allowed.';
+                    if (passwordIsValid) passwordError.textContent = 'Qoutes are not allowed.';
                     passwordInput.classList.add('invalid');
-                    Valid = false;
+                    passwordIsValid = false;
                 }
                 if (
                     lowerPassword.includes(lowerUsername) ||
                     lowerPassword.includes(lowerFirstname) ||
                     lowerPassword.includes(lowerLastname)
                 ) {
-                    if (Valid) passwordError.textContent = 'Password cannot contain your username or name.';
+                    if (passwordIsValid) passwordError.textContent = 'Password cannot contain your username or name.';
                     passwordInput.classList.add('invalid');
-                    Valid = false;
+                    passwordIsValid = false;
                 }
                 if (password !== confirmPassword) {
                     confirmError.textContent = 'Passwords do not match.';
                     confirmInput.classList.add('invalid');
-                    Valid = false;
+                    passwordIsValid = false;
                 }
-                return Valid;
+                return passwordIsValid;
         }
            
      fieldsToValidate.forEach(field => {
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const selected = form.querySelector(`input[name="${radio.name}"]:checked`);
             if (!selected) formIsValid = false;
         });
-        const checkboxes = form.querySelectorAll(`input[type="checkbox"][required]`);
+        const checkboxes = form.querySelectorAll(input[type="checkbox"][required]);
         checkboxes.forEach(cb => {
             if (!cb.checked) formIsValid = false;
         });
@@ -282,19 +282,23 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!field.checkValidity()) allValid = false;
         });
         if (!validatePasswordFields()) allValid = false; 
-        const radios = form.querySelectorAll('input[type="radio"][required]');
+        const radios = form.querySelectorAll('input[type="radio"]');
         const radioGroups = new Set();
         radios.forEach(radio => {
-            if (!groups.has(radio.name)) {
-                group.add(radio.name);
-                if (!form.querySelector(`input[name="${radio.name}"]:checked`))
-                allValid = false;
+            if (radioGroups.has(radio.name)) return;
+                radioGroups.add(radio.name);
+                const selected = form.querySelector(input[name="${radio.name}"]:checked);
+                const isRequired = form.querySelector(input[name"${radio.name}"][required]);
+                if (isRequired && !selected) {
+                    allValid = false;
             }
         });
-        form.querySelectorAll('input[type="checkbox"][required]').forEach (cb => {
+        const checkboxes = form.querySelectorAll(input[type="checkbox"][required]);
+        checkboxes.forEach(cb => {
             if (!cb.checked) allValid = false;
         });
-        form.querySelectorAll('select[required]').forEach (sel => {
+        const selects = form.querySelectorAll('select[required]');
+        selects.forEach(sel => {
             if (!sel.value) allValid = false;
         });
 
