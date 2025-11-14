@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let allValid = true;
 
         fieldsToValidate.forEach(field => {
-            if (!validateField(field)) allValid = false;
+            if (!field.checkValidity()) allValid = false;
         });
         if (!validatePasswordFields()) allValid = false; 
         const radios = form.querySelectorAll('input[type="radio"][required]');
@@ -290,14 +290,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!form.querySelector(`input[name="${radio.name}"]:checked`))
                 allValid = false;
             }
-        });
-        const checkboxes = form.querySelectorAll(`input[type="checkbox"][required]`);
-        checkboxes.forEach(cb => {
-            if (!cb.checked) allValid = false;
-        });
-        const selects = form.querySelectorAll('select[required]');
-        selects.forEach(sel => {
-            if (!sel.value) allValid = false;
         });
         form.querySelectorAll('input[type="checkbox"][required]').forEach (cb => {
             if (!cb.checked) allValid = false;
