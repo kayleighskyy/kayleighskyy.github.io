@@ -79,14 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
             if (!passwordInput || !confirmInput || !passwordError || !confirmError) return true;
 
-            if (!passwordInput.value && !confirmInput.value) {
-                passwordError.textContent = '';
-                confirmError.textContent = '';
-                passwordInput.classList.remove('invalid');
-                confirmInput.classList.remove('invalid');
-                return true;
-            }
-
                 let passwordIsValid = true;
                 let password = passwordInput.value;
                 let confirmPassword = confirmInput.value;
