@@ -35,39 +35,37 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateField(inputElement) {
         const errorSpan = document.getElementById(inputElement.id + '_text');
         let errorMessage = '';
-        const value = inputElement.value;
+        const value = inputElement.value.trim();
         const validity = inputElement.validity;
 
-        if (!inputElement.checkValidity()) {
-            if (!value && validity.valueMissing) {
+        if (errorSpan) errorSpan.textContent = '';
+
+            if (validity.valueMissing) {
                 errorMessage = `${inputElement.name || 'This field'} is required.`;
             }
-            else if (value.length > 0 && value.length < inputElement.minLength){
+            else if (inputElement.minlength > 0 && value.length < inputElement.minLength){
                 errorMessage = `${inputElement.name} must be at least ${inputElement.minLength} characters long.`;
             } 
             else if (inputElement.pattern && value.length > 0) {
-                const regex = new RegExp(`^${inputElement.pattern}$`);
+                const regex = new RegExp(inputElement.pattern);
                 if (!regex.test(value)){
-                    errorMessage = inputElement.title || `Please match the required format.`;
+                    errorMessage = inputElement.title || `Invalid format for ${inputElement.name}.`;
                 }
             }
-            else if (value.length > inputElement.maxLength){
+            else if (inputElement.maxlength > 0 && value.length > inputElement.maxLength){
                 errorMessage = `${inputElement.name} can only be ${inputElement.maxLength} characters long.`;
             }
             else if (validity.typeMismatch) {
                 errorMessage = `Please enter a valid ${inputElement.name}`;
             }
-            if (errorSpan) {
-                 errorSpan.textContent = errorMessage;   
+            if (errorMessage) {
+                 if (errorSpan) errorSpan.textContent = errorMessage;
+                 inputElement.classList.add('invalid');
+                 return false;
             } 
-                inputElement.classList.add('invalid');
-                return false;
-            } else {
-                if (errorSpan) errorSpan.textContent = '';
                 inputElement.classList.remove('invalid');
                 return true;
             }
-        }
 
         fieldsToValidate.forEach(field => {
             field.addEventListener('blur', () => validateField(field));
