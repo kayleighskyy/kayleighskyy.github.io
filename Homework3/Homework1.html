@@ -124,8 +124,9 @@
                    name="City"
                    required
                    placeholder="City"
+				   title="Please enter your city."
             >
-            <select name="State" id="state" required>
+            <select name="State" id="state" title="Please select your state." required>
                 <option value=" " disabled selected>Select a State</option>
                 <option value="AL">Alabama</option>
 	            <option value="AK">Alaska</option>
@@ -190,6 +191,7 @@
                    name="Zip"
                    required
                    placeholder="Zip"
+				   title="Zip can be 5 numbers (12345) or 9 numbers (12345-6789). Dash appears automatically."
             >
             <span id="city_text"><span id="state_text"></span><span id="zip_text"></span>
     </tr>
@@ -242,7 +244,7 @@
                 </div>
                 <div>
             <label for="ssn">SSN</label>
-            <input type="text"
+            <input type="password"
                    size="15"
                    maxlength="11"
                    pattern="\d{3}-\d{2}-\d{4}"
@@ -250,6 +252,7 @@
                    name="SSN"
                    required
                    placeholder="***-**-****"
+				   title="Please enter your full SSN. Number will be hidden and dashes inbetween the numbers will automatically appear."
             >
                 </div>
             </div>  
@@ -339,6 +342,7 @@
                     name="Password"
                     required
                     placeholder="********"
+				    title="Password must be 8 to 30 characters and have at least one uppercase, lowercase, number, and special character."
             >
         <span id="password_text"></span>
         </td>
@@ -372,6 +376,7 @@
                     name="Verify Password"
                     required
                     placeholder="********"
+				    title="Passwords must match."
             >
         <span id="vpass_text"></span>
         </td>
