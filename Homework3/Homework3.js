@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         const selects = form.querySelectorAll('select[required]');
         selects.forEach(sel => {
-            if (!sel.checked) formIsValid = false;
+            if (!sel.value) formIsValid = false;
         });
         if (!formIsValid) {
             event.preventDefault();
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
     form.querySelectorAll('input[type="radio"]').forEach (radio => {
         radio.addEventListener('change', updateSubmitButton);
     });
-    form.querySelectAll('input[type="checkbox"]').forEach (cb => {
+    form.querySelectorAll('input[type="checkbox"]').forEach (cb => {
         cb.addEventListener('change', updateSubmitButton);
     });
     form.querySelectorAll('select').forEach (sel => {
