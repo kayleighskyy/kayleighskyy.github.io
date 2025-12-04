@@ -318,5 +318,69 @@ document.addEventListener('DOMContentLoaded', function() {
         sel.addEventListener('change', updateSubmitButton);
     });
     updateSubmitButton();
+
+function setCookie(name, value, hours) {
+    const d = new Date();
+        d.setTime(d.getTime() + (hours * 60 * 60 * 1000));
+    const expires = "expires =" + d.toUTCString();
+    document.cookie = `${name}=${value};${expires};path=/`;
+} 
+
+function getCookie(name) {
+    const cookies = document.cookie.split(";");
+    for (const c of cookies) {
+        c = c.trim();
+        const [key, val] = c.split("=");
+        if (key === name) return val;
+    }
+    return " ";
+} 
+
+function deleteCookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+}
+
+function checkCookie() {
+    const welcome = document.getElementById("welcome");
+    const notuser = document.getElementById("notuser");
+    const newuser = document.getElementById("newuser");
+
+    let user = getCookie("username");
+
+    if (user) {
+        welcome.textContent = `Welcome back, ${user}!`;
+        setCookie("username", user, 48);
+
+        notuser.innerHTML = 
+            <label>
+                <input type"checkbox" id="checkednotuser">
+                Not ${user}? Please create a profile
+            </label>';
+
+        document.getElementById("checkednotuser").addEventListener("change", function() {
+            if (this.checked) {
+                deleteCookie("username");
+                welcome.textContent = "Welcome New User";
+                notuser.innerHTML = "";
+                userForm.reset();
+            }
+        });
+    } else {
+        welecome.textContent = "Welcome New User";
+    }
+}
+
+function handleSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById("firstname").value.trim();
+    const remember = document.getElementById("rememberme".checked;
+
+    if (remember) {
+        setCookie("username", name, 48);
+    } else {
+        deleteCookie("username");
+    }
+    location.reload();
+}
                                                  
 });
