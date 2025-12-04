@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 let passwordIsValid = true;
                 let password = passwordInput.value;
                 let confirmPassword = confirmInput.value;
+            
             if (password.length === 0 && confirmPassword.length === 0) {
                 passwordError.textContent = '';
                 confirmError.textContent = '';
