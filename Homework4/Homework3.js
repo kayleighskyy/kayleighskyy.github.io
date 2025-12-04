@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function setCookie(name, value, hours) {
     const d = new Date();
         d.setTime(d.getTime() + (hours * 60 * 60 * 1000));
-    const expires = "expires =" + d.toUTCString();
+    const expires = "expires=" + d.toUTCString();
     document.cookie = `${name}=${value};${expires};path=/`;
 } 
 
@@ -353,7 +353,7 @@ function checkCookie() {
 
         notuser.innerHTML = 
             <label>
-                <input type"checkbox" id="checkednotuser">
+                <input type="checkbox" id="checkednotuser">
                 Not ${user}? Please create a profile
             </label>';
 
@@ -366,14 +366,14 @@ function checkCookie() {
             }
         });
     } else {
-        welecome.textContent = "Welcome New User";
+        welcome.textContent = "Welcome New User";
     }
 }
 
 function handleSubmit(event) {
     event.preventDefault();
     const name = document.getElementById("firstname").value.trim();
-    const remember = document.getElementById("rememberme".checked;
+    const remember = document.getElementById("rememberme").checked;
 
     if (remember) {
         setCookie("username", name, 48);
@@ -382,5 +382,6 @@ function handleSubmit(event) {
     }
     location.reload();
 }
-                                                 
+
+document.addEventListener("DOMContentLoaded", checkCookie);
 });
