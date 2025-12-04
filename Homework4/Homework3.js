@@ -383,5 +383,4 @@ function handleSubmit(event) {
     location.reload();
 }
 
-document.addEventListener("DOMContentLoaded", checkCookie);
 });
