@@ -343,7 +343,7 @@ function deleteCookie(name) {
 function checkCookie() {
     const welcome = document.getElementById("welcome");
     const notuser = document.getElementById("notuser");
-    const newuser = document.getElementById("newuser");
+    const newuser = document.getElementById("wellnessform");
 
     let user = getCookie("username");
 
@@ -352,28 +352,30 @@ function checkCookie() {
         setCookie("username", user, 48);
 
         notuser.innerHTML = 
-            <label>
+            `<label>
                 <input type="checkbox" id="checkednotuser">
                 Not ${user}? Please create a profile
-            </label>';
+            </label>`;
 
         document.getElementById("checkednotuser").addEventListener("change", function() {
             if (this.checked) {
                 deleteCookie("username");
                 welcome.textContent = "Welcome New User";
                 notuser.innerHTML = "";
-                userForm.reset();
+                if (userForm) userForm.reset();
             }
         });
     } else {
         welcome.textContent = "Welcome New User";
     }
 }
-
-function handleSubmit(event) {
-    event.preventDefault();
-    const name = document.getElementById("firstname").value.trim();
-    const remember = document.getElementById("rememberme").checked;
+checkCookie();
+const form = document.getElementById('wellnessform');
+if (form) {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const name = document.getElementById("firstname").value.trim();
+        const remember = document.getElementById("rememberme").checked;
 
     if (remember) {
         setCookie("username", name, 48);
@@ -381,6 +383,5 @@ function handleSubmit(event) {
         deleteCookie("username");
     }
     location.reload();
+    });
 }
-
-});
