@@ -82,12 +82,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 let passwordIsValid = true;
                 let password = passwordInput.value;
                 let confirmPassword = confirmInput.value;
-            
+            if (password.length === 0 && confirmPassword.length === 0) {
                 passwordError.textContent = '';
                 confirmError.textContent = '';
                 passwordInput.classList.remove('invalid');
                 confirmInput.classList.remove('invalid');
-            
+                return true;
+            }
                 const lowerPassword = password.toLowerCase();
                 const lowerUsername = usernameInput?.value.toLowerCase() || '';
                 const lowerFirstname = firstname.toLowerCase();
