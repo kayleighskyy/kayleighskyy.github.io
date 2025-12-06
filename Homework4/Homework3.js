@@ -372,7 +372,7 @@ checkCookie();
     
 const userCookie = getCookie('fname');
     if (userCookie) {
-        const isSameUser = confirm(`Welcome back ${userCookie}! Is this you?`);
+        const isSameUser = confirm(`Welcome back ${userCookie}!`);
         if (isSameUser) {
             loadFormData();
             document.getElementById('firstname').value = userCookie;
