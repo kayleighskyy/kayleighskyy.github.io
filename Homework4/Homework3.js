@@ -393,13 +393,15 @@ function loadFormData() {
     fieldsToValidate.forEach(field => {
         if (!field.name) return;
         const stored = localStorage.getItem('form_' + field.name);
-        if stored !== null) field.value = stored;
+        if (stored !== null) field.value = stored;
     });
 }
 
 function clearFormData() {
     fieldsToValidate.forEach(field => {
         if (!field.name) return;
+        const sentitiveFields = ['password', 'vpass', 'ssn'];
+        if (sensitiveFields.includes(field.name)) return;
         localStorage.removeItem('form_' + field.name);
     });
 }
