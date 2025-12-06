@@ -353,8 +353,23 @@ function getCookie(cname) {
 }
     return "";
 }
-
+    
+function checkCookie() {
+    let message;
+    let fname = getCookie("fname");
+    if (fname != "")
+    {
+        message = "Welcome back " + fname + ".\n Press OK to confirm or CANCEL if this isn't " + fname + ".";
+        if (confirm(message))
+        { document.getElementById("firstname").setAttribute('value', fname);
+        }
+        else {
+            setCookie("fname", "", 0);
+        }
+    }
+}
 checkCookie();
+    
 const userCookie = getCookie('fname');
     if (userCookie) {
         const isSameUser = confirm(`Welcome back ${userCookie}! Is this you?`);
