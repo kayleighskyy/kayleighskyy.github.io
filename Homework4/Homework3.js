@@ -126,12 +126,19 @@ document.addEventListener('DOMContentLoaded', function() {
            
      fieldsToValidate.forEach(field => {
             field.addEventListener('blur', () => {
-                validateField(field); updateSubmitButton();
+                validateField(field); 
+                saveField(field);
+                updateSubmitButton();
          });
             field.addEventListener('input', () => {
-                validateField(field); updateSubmitButton();
+                validateField(field); 
+                saveField(field);
+                updateSubmitButton();
         });
-            field.addEventListener('change', updateSubmitButton);
+            field.addEventListener('change', () => {
+                saveField(field);
+                updateSubmitButton);
+            });
         });
 
     form.addEventListener('submit', function(event) {
@@ -362,9 +369,40 @@ function checkCookie() {
     }
 }
 checkCookie();
+const userCookie = getCookie('fname');
+    if (userCookie) {
+        const isSameUser = confirm(`Welcome back ${userCookie}! Is this you?`);
+        if (isSameUser) {
+            loadFormData();
+            document.getElementById('firstname').value = userCookie;
+        } 
+        else {
+            clearFormData ();
+            setCookie('fname', '', 0);
+            fieldsToValidate.forEach(f => f.value = '');
+        }
+    }
+function saveField(field) {
+    if (!field.name) return;
+    const sensitiveFields = ['password', 'vpass', 'ssn'];
+    if (sensitiveFields.includes(field.name)) return;
+    localStorage.setItem('form_' + field.name, field.value);
+}
 
-document.getElementById("fname").innerHTML = localStorage.getItem("firstname");
-document.getElementById("lastname").innerHTML = localStorage.getItem("lastname");
+function loadFormData() {
+    fieldsToValidate.forEach(field => {
+        if (!field.name) return;
+        const stored = localStorage.getItem('form_' + field.name);
+        if stored !== null) field.value = stored;
+    });
+}
+
+function clearFormData() {
+    fieldsToValidate.forEach(field => {
+        if (!field.name) return;
+        localStorage.removeItem('form_' + field.name);
+    });
+}
     
 
 });
