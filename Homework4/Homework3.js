@@ -421,6 +421,7 @@ async function loadStates() {
             option.value = code;
             option.textContent = states[code];
             select.appendChild(option);
+        }
     } 
     catch (error) {
         console.error('Error loading states:', error);
@@ -430,6 +431,6 @@ async function loadStates() {
         select.appendChild(errorOption);
     }
 }
-    document.addEventListener('DOMContentLoaded', loadStates);
+   loadStates();
 
 });
