@@ -408,6 +408,26 @@ function clearFormData() {
         localStorage.removeItem('form_' + field.name);
     });
 }
-    
+
+async function loadStates() {
+    const select = document.getElementById('state');
+    try {
+        const response = await fetch('states.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const states = await response.json();
+        select.innerHTML = '<option value="" disabled selected>Select a State</option>';
+        states.forEach(state => {
+            const option = document.createElement('option');
+            option.value = state.code;
+            option.textContent = state.name;
+            select.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error loading states:', error);
+    }
+}
+    document.addEventListener('DOMContentLoaded', loadStates);
 
 });
