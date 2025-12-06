@@ -165,13 +165,14 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Please review errors and correct before submitting the form.');
             return;
         }
-        const remember = document.getElementById("rememberme".checked;
+        const remember = document.getElementById("rememberme").checked;
         const fname = document.getElementById("firstname")?.value.trim();
         if (remember && fname) {
             setCookie("fname", fname, 2);
         }
         else {
             setCookie("fname", "", 0);
+        }
         });
     
     const ssnInput = document.getElementById('ssn');
@@ -367,6 +368,7 @@ function checkCookie() {
 function loadwelcomeheader() {
     const welcomeDiv = document.getElementById("Welcomemessage");
     const wrongDiv = document.getElementById("Wrongusermessage");
+    if (!welcomeDiv || !wrongDiv) return;
     let fname = getCookie("fname");
     if(fname) {
         welcomeDiv.textContent = `Welcome back, ${fname}!`;
@@ -377,7 +379,7 @@ function loadwelcomeheader() {
                 >
                 Not ${fname}? Click here to start a profile as a new user.
             </label>`;
-    document.getElementById("Wronguser").addEventListner("change", function () {
+    document.getElementById("Wronguser").addEventListener("change", function () {
         if (this.checked) {
             setCookie("fname", "", 0);
             document.getElementById("wellnessform").reset();
