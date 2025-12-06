@@ -361,7 +361,9 @@ function checkCookie() {
         }
     }
 }
-checkCookie();        
+checkCookie();
+
+document.getElementById("fname").innerHTML = localStorage.getItem("firstname");
     
 
 });
