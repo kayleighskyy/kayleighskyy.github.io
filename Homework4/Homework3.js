@@ -383,7 +383,6 @@ const userCookie = getCookie('fname');
             fieldsToValidate.forEach(f => f.value = '');
         }
     }
-const remembermeCheckbox = document.getElementById('rememberme');
 function saveField(field) {
     const sensitiveFields = ['Password', 'Verify Password', 'SSN'];
     if (!remembermeCheckbox?.checked) return;
@@ -393,7 +392,6 @@ function saveField(field) {
 }
 
 function loadFormData() {
-     if (!remembermeCheckbox?.checked) return;
     const sensitiveFields = ['Password', 'Verify Password', 'SSN'];
     fieldsToValidate.forEach(field => {
         if (sensitiveFields.includes(field.name)) return;
@@ -411,14 +409,6 @@ function clearFormData() {
         localStorage.removeItem('form_' + field.name);
     });
 }
-remembermeCheckbox.addEventListener('change', function() {
-    localStorage.setItem('rememberme', this.checked);
-    if (!this.checked) clearFormData();
-    else loadFormData();
-});
-    const remember = localStorage.getItem('rememberme') === 'true';
-    remembermeCheckbox.checked = remember;
-    if (remember) loadFormData();
 
 async function loadStates() {
     const select = document.getElementById('state');
