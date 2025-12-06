@@ -160,8 +160,8 @@ table.form {
     background-color: orange;
     color: black;
     display: flex;
-    justify-content: center;
-    align-item: center;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
     font-size: 14px;
     font-family: 'Courier New', Courier, monospace;
