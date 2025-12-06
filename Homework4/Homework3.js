@@ -368,7 +368,16 @@ function checkCookie() {
         }
     }
 }
+
+function checkFirstTime() {
+    let visited = getCookie("firsttime");
+    if (!visited) {
+        alert("Welcome New User!");
+        setCookie(firsttime", "yes", 365);
+    }
+}
 checkCookie();
+checkFirstTime();
     
 const userCookie = getCookie('fname');
     if (userCookie) {
