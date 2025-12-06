@@ -166,7 +166,7 @@ table.form {
     font-size: 14px;
     font-family: 'Courier New', Courier, monospace;
 }
-.footericons img {
+.footericons {
     width: 45px;
     height: 45px;
     margin-left: 10px;
