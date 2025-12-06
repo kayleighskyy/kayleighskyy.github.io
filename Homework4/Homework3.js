@@ -392,7 +392,7 @@ function saveField(field) {
 function loadFormData() {
     const sensitiveFields = ['password', 'vpass', 'ssn'];
     fieldsToValidate.forEach(field => {
-        if (!field.name) return;
+        if (!field.name && !field.id) return;
         if (sensitiveFields.includes(field.name)) return;
         const stored = localStorage.getItem('form_' + field.name);
         if (stored !== null) field.value = stored;
@@ -402,7 +402,7 @@ function loadFormData() {
 function clearFormData() {
     const sensitiveFields = ['password', 'vpass', 'ssn'];
     fieldsToValidate.forEach(field => {
-        if (!field.name) return;
+        if (!field.name && !field.id) return;
         if (sensitiveFields.includes(field.name)) return;
         localStorage.removeItem('form_' + field.name);
     });
