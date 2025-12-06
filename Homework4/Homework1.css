@@ -163,4 +163,5 @@ table.form {
     margin-bottom: 30px;
     max-width: 100vw;
     font-family: 'Courier New', Courier, monospace;
+    position: sticky;
 }
