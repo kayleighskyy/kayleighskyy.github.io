@@ -384,16 +384,16 @@ const userCookie = getCookie('fname');
         }
     }
 function saveField(field) {
-    const sensitiveFields = ['password', 'vpass', 'ssn'];
-    if (sensitiveFields.includes(field.id)) return;
+    const sensitiveFields = ['Password', 'Verify Password', 'SSN'];
+    if (sensitiveFields.includes(field.name)) return;
     if (!field.name) return;
     localStorage.setItem('form_' + field.name, field.value);
 }
 
 function loadFormData() {
-    const sensitiveFields = ['password', 'vpass', 'ssn'];
+    const sensitiveFields = ['Password', 'Verify Password', 'SSN'];
     fieldsToValidate.forEach(field => {
-        if (sensitiveFields.includes(field.id)) return;
+        if (sensitiveFields.includes(field.name)) return;
         if (!field.name) return;
         const stored = localStorage.getItem('form_' + field.name);
         if (stored !== null) field.value = stored;
@@ -401,9 +401,9 @@ function loadFormData() {
 }
 
 function clearFormData() {
-    const sensitiveFields = ['password', 'vpass', 'ssn'];
+    const sensitiveFields = ['Password', 'Verify Password', 'SSN'];
     fieldsToValidate.forEach(field => {
-        if (sensitiveFields.includes(field.id)) return;
+        if (sensitiveFields.includes(field.name)) return;
         if (!field.name) return;
         localStorage.removeItem('form_' + field.name);
     });
