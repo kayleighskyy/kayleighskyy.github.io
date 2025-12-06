@@ -170,3 +170,7 @@ table.form {
     max-width: 100vw;
     font-family: 'Courier New', Courier, monospace;
 }
+body {
+    padding-bottom: 70px;
+}
+
