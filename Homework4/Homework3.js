@@ -173,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
         else {
             setCookie("fname", "", 0);
         }
-    });
     
     const ssnInput = document.getElementById('ssn');
     if (ssnInput) {
