@@ -427,7 +427,7 @@ async function loadStates() {
         console.error('Error loading states:', error);
         const errorOption = document.createElement('option');
         errorOption.value = "";
-        errorOption.textContent = "Falied to load states";
+        errorOption.textContent = "Failed to load states";
         select.appendChild(errorOption);
     }
 }
