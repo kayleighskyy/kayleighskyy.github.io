@@ -159,15 +159,11 @@ table.form {
     width: 100%;
     background-color: orange;
     color: black;
-    text-align: center;
-    font-size: large;
-    font-weight: bold;
-    vertical-align: middle;
-    height: 45px;
-    line-height: 45px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    max-width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-item: center;
+    padding: 10px 20px;
+    font-size: 14px;
     font-family: 'Courier New', Courier, monospace;
 }
 body {
