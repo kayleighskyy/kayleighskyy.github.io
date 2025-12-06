@@ -151,9 +151,3 @@ table.form {
   font-family: 'Courier New', Courier, monospace;
   text-align: center;
 }
-.footer {
-    position: fixed;
-    left: 0;
-    right: 0;
-    width: 100%;
-}
