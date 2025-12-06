@@ -383,7 +383,7 @@ const userCookie = getCookie('fname');
         }
     }
 function saveField(field) {
-    if (!field.name) return;
+    if (!field.name && !field.id) return;
     const sensitiveFields = ['password', 'vpass', 'ssn'];
     if (sensitiveFields.includes(field.name)) return;
     localStorage.setItem('form_' + field.name, field.value);
