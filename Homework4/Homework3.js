@@ -163,6 +163,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!formIsValid) {
             event.preventDefault();
             alert('Please review errors and correct before submitting the form.');
+            return;
+        }
+        const fname = document.getElementById("firstname")?.value.trim();
+        if (fname) {
+            setCookie("fname", fname, 30);
         }
         });
     
@@ -356,7 +361,7 @@ function checkCookie() {
         }
     }
 }
-        
+checkCookie();        
     
 
 });
