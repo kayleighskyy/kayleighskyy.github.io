@@ -411,13 +411,12 @@ function clearFormData() {
         localStorage.removeItem('form_' + field.name);
     });
 }
-remembermeCheckbox.addEventListener('change, function() {
+remembermeCheckbox.addEventListener('change', function() {
     localStorage.setItem('rememberme', this.checked);
     if (!this.checked) clearFormData();
     else loadFormData();
 });
-document.addEventListener('DOMContentLoaded', () => {
-    const remember = localStorage.getItem('rememberme') === true;
+    const remember = localStorage.getItem('rememberme') === 'true';
     remembermeCheckbox.checked = remember;
     if (remember) loadFormData();
 });
