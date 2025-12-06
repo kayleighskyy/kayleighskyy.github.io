@@ -412,7 +412,7 @@ function clearFormData() {
 async function loadStates() {
     const select = document.getElementById('state');
     try {
-        const response = await fetch('states-list.json');
+        const response = await fetch('state-list.json');
         if (!response.ok) throw new Error('Network response was not ok'); 
 
         const states = await response.json();
