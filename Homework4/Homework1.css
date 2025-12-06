@@ -152,6 +152,10 @@ table.form {
   text-align: center;
 }
 .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     background-color: orange;
     color: black;
     text-align: center;
@@ -163,5 +167,4 @@ table.form {
     margin-bottom: 30px;
     max-width: 100vw;
     font-family: 'Courier New', Courier, monospace;
-    position: fixed;
 }
