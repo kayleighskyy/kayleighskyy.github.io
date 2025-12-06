@@ -169,11 +169,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const fname = document.getElementById("firstname")?.value.trim();
         if (remember && fname) {
             setCookie("fname", fname, 2);
-        }
+        } 
         else {
             setCookie("fname", "", 0);
         }
-        });
+    });
     
     const ssnInput = document.getElementById('ssn');
     if (ssnInput) {
