@@ -416,6 +416,11 @@ remembermeCheckbox.addEventListener('change, function() {
     if (!this.checked) clearFormData();
     else loadFormData();
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const remember = localStorage.getItem('rememberme') === true;
+    remembermeCheckbox.checked = remember;
+    if (remember) loadFormData();
+});
 async function loadStates() {
     const select = document.getElementById('state');
     try {
