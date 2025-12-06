@@ -151,3 +151,16 @@ table.form {
   font-family: 'Courier New', Courier, monospace;
   text-align: center;
 }
+.footer {
+    background-color: orange;
+    color: black;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    vertical-align: middle;
+    height: 25px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    max-width: 100vw;
+    font-family: 'Courier New', Courier, monospace;
+}
