@@ -163,7 +163,8 @@ table.form {
     font-size: large;
     font-weight: bold;
     vertical-align: middle;
-    height: 25px;
+    height: 45px;
+    line-height: 45px;
     margin-top: 30px;
     margin-bottom: 30px;
     max-width: 100vw;
