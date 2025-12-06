@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
             field.addEventListener('change', () => {
                 saveField(field);
-                updateSubmitButton);
+                updateSubmitButton();
             });
         });
 
@@ -390,17 +390,19 @@ function saveField(field) {
 }
 
 function loadFormData() {
+    const sensitiveFields = ['password', 'vpass', 'ssn'];
     fieldsToValidate.forEach(field => {
         if (!field.name) return;
+        if (sensitiveFields.includes(field.name)) return;
         const stored = localStorage.getItem('form_' + field.name);
         if (stored !== null) field.value = stored;
     });
 }
 
 function clearFormData() {
+    const sensitiveFields = ['password', 'vpass', 'ssn'];
     fieldsToValidate.forEach(field => {
         if (!field.name) return;
-        const sentitiveFields = ['password', 'vpass', 'ssn'];
         if (sensitiveFields.includes(field.name)) return;
         localStorage.removeItem('form_' + field.name);
     });
