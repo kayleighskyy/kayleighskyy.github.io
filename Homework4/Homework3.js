@@ -364,7 +364,7 @@ function checkCookie() {
 checkCookie();
 
 document.getElementById("fname").innerHTML = localStorage.getItem("firstname");
-document.getElementById("lname").innerHTML = localStorage.getItem("lastname");
+document.getElementById("lastname").innerHTML = localStorage.getItem("lastname");
     
 
 });
