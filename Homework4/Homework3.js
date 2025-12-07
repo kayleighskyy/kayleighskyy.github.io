@@ -392,6 +392,10 @@ const userCookie = getCookie('fname');
             fieldsToValidate.forEach(f => f.value = '');
         }
     }
+const savedRemember = localStorage.getItem("rememberme");
+    if (savedRemember !== null) {
+        remembermeCheckbox.checked = savedRemember === "true";
+    }
 remembermeCheckbox.addEventListener('change', () => {
     const remember = remembermeCheckbox.checked;
     localStorage.setItem("rememberme", remember);
@@ -407,10 +411,6 @@ remembermeCheckbox.addEventListener('change', () => {
         }
     }
 });
-const savedRemember = localStorage.getItem("rememberme");
-    if (savedRemember !== null) {
-        remembermeCheckbox.checked = savedRemember === "true";
-    }
     
 function saveField(field) {
     const sensitiveFields = ['Password', 'Verify Password', 'SSN'];
