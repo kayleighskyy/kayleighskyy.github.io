@@ -393,7 +393,7 @@ const userCookie = getCookie('fname');
         }
     }
 remembermeCheckbox.addEventListener('change', () => {
-    const remember = rememberCheckbox.checked;
+    const remember = remembermeCheckbox.checked;
     localStorage.setItem("rememberme", remember);
     if (!remember) {
         clearFormData();
@@ -406,6 +406,7 @@ remembermeCheckbox.addEventListener('change', () => {
             localStorage.setItem("form_First name", fname);
         }
     }
+});
 const savedRemember = localStorage.getItem("rememberme");
     if (savedRemember !== null) {
         remembermeCheckbox.checked = savedRemember === "true";
