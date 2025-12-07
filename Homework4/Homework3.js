@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+const remembermeCheckbox = document.getElementById("rememberme");
     const today = new Date();
         const formattedDate = 
             String(today.getMonth() + 1).padStart(2, '0') + '/' +
@@ -391,9 +392,28 @@ const userCookie = getCookie('fname');
             fieldsToValidate.forEach(f => f.value = '');
         }
     }
+remembermeCheckbox.addEventListener('change', () => {
+    const remember = rememberCheckbox.checked;
+    localStorage.setItem("rememberme", remember);
+    if (!remember) {
+        clearFormData();
+        setCookie("fname", "", 0);
+    }
+    else {
+        const fname = document.getElementById('firstname')?.value.trim();
+        if (fname) {
+            setCookie("fname", fname, 30);
+            localStorage.setItem("form_First name", fname);
+        }
+    }
+const savedRemember = localStorage.getItem("rememberme");
+    if (savedRemember !== null) {
+        remembermeCheckbox.checked = savedRemember === "true";
+    }
+    
 function saveField(field) {
     const sensitiveFields = ['Password', 'Verify Password', 'SSN'];
-    if (!remembermeCheckbox?.checked) return;
+    if (!remembermeCheckbox.checked) return;
     if (sensitiveFields.includes(field.name)) return;
     if (!field.name) return;
     localStorage.setItem('form_' + field.name, field.value);
