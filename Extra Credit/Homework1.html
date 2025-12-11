@@ -468,12 +468,6 @@
            value="Review"
            class="left-review"
     >
-    <input type="submit"
-           value="Submit"
-           id="submit"
-           class="middle-submit"
-
-    >
     <input type="reset"
            value="Reset"
            id="reset"
@@ -482,6 +476,12 @@
 </div>
 <div id="reviewoutput" class="reviewoutput"></div>
 </form>
+<dialog id="reviewmodal"
+	<h2>Please review your information</h2>
+	<div id="modalsummary"></div>
+	<button id="modalbackbutton">Go back and edit your information</button>
+	<button id="modalsubmitbutton" disabled>Submit</button>
+</dialog>
 <footer class="footer">
     <div style="display:flex; align:center;">
     <div>
