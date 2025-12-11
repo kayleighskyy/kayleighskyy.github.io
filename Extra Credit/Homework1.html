@@ -1,0 +1,527 @@
+  <!DOCTYPE html>
+<!--
+    Name: Kayleigh Phongvichith
+    File: Homework4.html
+    Date Created: October 21, 2025
+    Date Updated: December 5, 2025
+    Purpose: Homework #4
+-->
+<html>
+    <head>
+        <title>Kayleigh's Homework 4</title>
+        <link rel="stylesheet" href="./Homework1.css">
+		<div id="Welcomemessage"></div>
+		<div id="Wrongusermessage"></div>
+    </head>
+    <body>
+        <div id="header">
+            <table width="100%">
+                <tr>
+                    <td>
+                        <img
+                            id="logo"
+                            src="./Homework1Logo.jpg"
+                            height="150"
+                            width="150"
+                            alt="logo"
+                        >
+                    </td>
+                    <td class="page-title">Houston Health & Wellness
+                    <td valign="bottom" text-align="right">Today's Date: <span id="date"></span></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+<div class="center">
+<form action="./Thankyou.html" method="get" id="wellnessform" novalidate>
+	<iframe src="./iframe-display.html" name="iframe_pictures" height="200px" width="100%" title="pictures"></iframe>
+	<p><a href="https://uhcougars.com/galleries/mens-basketball/mbk-vs-auburn/1920" target="iframe_pictures">Click here to see pictures!</a></p>
+    <div class="border">
+    <table class="form">
+    <tr class="form">
+        <div class="heading">Create Patient Profile</div>
+    </tr>
+    <tr class="form">
+        <td align="right">
+            <label for="name">Name</label>
+        </td>
+        <td>
+            <input type="text"
+                   size="25"
+                   minlength="1"
+                   maxlength="30"
+				   pattern="[A-Za-z' \-]{1,30}"
+                   id="firstname"
+                   name="First Name"
+                   required
+                   placeholder="First Name"
+				   title="Minumum 1 character; only letters, spaces, dashes and apostrophes allowed."
+            >
+            
+            
+            <input type="text"
+                   size="2"
+                   maxlength="1"
+				   pattern="[A-Za-z]"
+                   id="middleinit"
+                   name="Middle Initial"
+                   placeholder="MI"
+				   title="Middle initial only."
+            >
+            
+            <input type="text"
+                   size="25"
+                   minlength="1"
+                   maxlength="30"
+				   pattern="[A-Za-z2-5'\-]{1,30}"
+                   id="lastname"
+                   name="Last Name"
+                   required
+                   placeholder="Last Name"
+                   title="Minumum 1 character; only letters, apostrophes, numbers (3rd), and dashes allowed."
+            >
+            
+        <span id="firstname_text"></span><span id="middleinital_text"></span><span id="lastname_text"></span>
+    </tr>
+    <tr class="form">
+        <td align="right">
+            <label for="addr1">Address 1</label>
+        </td>
+        <td>
+            <input type="text"
+                    size="57"
+                    minlength="2"
+                    maxlength="30"
+                    id="addr1"
+                    name="Address 1"
+                    required
+                    placeholder="Street Number and Street Name"
+				    title="Please enter your street number and street name."
+            >
+        <span id="addr1_text"></span>
+    </tr>
+    <tr class="form">
+        <td align="right">
+            <label for="addr2">Address 2</label>
+        </td>
+        <td>
+            <input type="text"
+                   size="57"
+                   minlength="2"
+                   maxlength="30"
+                   id="addr2"
+                   name="Address 2"
+                   placeholder="Apt, Unit, Etc"
+				   title="Enter Apt Number, Unit Number, Etc."
+            >
+        <span id="addr2_text"></span>
+    </tr>
+    <tr class="form">
+        <td align="right">
+            <label for="city">City,</label>
+            <label for="state">State,</label>
+            <label for="zip">Zip</label>
+        </td>
+        <td>
+            <input type="text"
+                   size="12"
+                   minlength="2"
+                   maxlength="30"
+                   id="city"
+                   name="City"
+                   required
+                   placeholder="City"
+				   title="Please enter your city."
+            >
+            <select name="State" id="state" title="Please select your state." required>
+                <option value=" " disabled selected>Select a State</option>
+            </select>
+
+            <input type="text"
+                   pattern="^\d{5}(-\d{4})?$"
+                   size="10"
+                   maxlength="10"
+                   id="zip"
+                   name="Zip"
+                   required
+                   placeholder="Zip"
+				   title="Zip can be 5 numbers (12345) or 9 numbers (12345-6789). Dash appears automatically."
+            >
+            <span id="city_text"><span id="state_text"></span><span id="zip_text"></span>
+    </tr>
+    <tr class="form">
+        <td align="right">
+            <label for="phone">Phone Number</label>
+        </td>
+        <td>
+            <div style="display:flex; align:center; gap:74px;">
+                <div>
+            <input type="tel"
+                   size="15"
+                   maxlength="12"
+                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                   id="phone"
+                   name="Phone Number"
+                   required
+                   placeholder="972-987-0987"
+				   title="Please enter your phone number, dashes will automatically be placed."
+            >
+                </div>
+                <div>
+            <label for="work">Work Number</label>
+            <input type="tel"
+                   size="15"
+                   maxlength="13"
+                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                   id="work"
+                   name="Work Number"
+                   placeholder="945-123-4567"
+            >
+                </div>
+            </div>
+            <span id="phone_text"><span id="work_text"></span>
+    </tr>
+    <tr class="form">
+        <td align="right">
+            <label for="birth">Date of Birth</label>
+        </td>
+        <td>
+            <div style="display:flex; align:center; gap:140px;">
+                <div>
+            <input type="date"
+                   size="15"
+                   maxlength="13"
+                   id="birth"
+                   name="Date of Birth"
+                   required
+                   title="Please select your date of birth."
+            >
+                </div>
+                <div>
+            <label for="ssn">SSN</label>
+            <input type="password"
+                   size="15"
+                   maxlength="11"
+                   pattern="\d{3}-\d{2}-\d{4}"
+                   id="ssn"
+                   name="SSN"
+                   required
+                   placeholder="***-**-****"
+				   title="Please enter your full SSN. Number will be hidden and dashes inbetween the numbers will automatically appear."
+            >
+                </div>
+            </div>  
+            <span id="birth_text"><span id="ssn_text"></span>     
+    </tr>
+    <tr class="form">
+        <td align="right">
+            <label for="gender">Gender</label>
+        </td>
+        <td>
+            <div style="display:flex; align:center; gap:50px;">
+                <div>
+            <input type="radio"
+                   id="male"
+                   name="gender"
+                   value="Male"
+                   required
+            >
+            <label for="male">Male</label>
+                </div>
+                <div>
+            <input type="radio"
+                   id="female"
+                   name="gender"
+                   value="Female"
+                   required
+            >
+            <label for="female">Female</label>
+                </div>
+                <div>
+            <input type="radio"
+                   id="other"
+                   name="gender"
+                   value="Other"
+                   required
+            >
+            <label for="other">Other</label>
+                </div>
+    </tr>
+
+    <tr>
+        <td style="height:30px;"></td>
+    </tr>
+    <tr class="form">
+        <td align="right">
+            <label for="username">Desired Username</label>
+        </td>
+        <td>
+            <input type="text"
+                    size="57"
+                    minlength="5"
+                    maxlength="20"
+                    pattern="[A-Za-z][A-Za-z0-9_-]{5,30}"
+                    id="username"
+                    name="Username"
+                    required
+                    placeholder="No special characters or spaces"
+				    title="Username can't start with a number."
+            >
+        <span id="username_text"></span>
+        </td>
+    </tr>
+    <tr class="form">
+        <td align="right">
+            <label for="email">Email</label>
+        </td>
+        <td>
+            <input type="email"
+                    size="57"
+                    id="email"
+                    name="Email"
+                    required
+                    placeholder="Emailname@example.com"
+				    title="Please enter your email address."
+            >
+        <span id="email_text"></span>
+        </td>
+    </tr>
+    <tr class="form">
+        <td align="right">
+            <label for="password">Password</label>
+        </td>
+        <td>
+            <input type="password"
+                    size="57"
+                    minlength="8"
+                    maxlength="30"
+                    id="password"
+                    name="Password"
+                    required
+                    placeholder="********"
+				    title="Password must be at least 8 to 30 characters. Password must have 1 upper case letter, 1 lowercase letter, and 1 special character."
+            >
+        <span id="password_text"></span>
+        </td>
+    </tr>
+    <tr class="form">
+        <td align="right">
+            <label for="passreq">Password Requirements</label>
+        </td>
+        <td>
+            <div class="list">
+            <ul>
+                <li> 8 to 30 Characters</li>
+                <li> 1 Upper case</li>
+            </ul>
+            <ul>
+                <li> 1 Lower case</li>
+                <li> 1 Special Character</li>
+            </ul>
+        </td>
+    </tr>
+    <tr class="form">
+        <td align="right">
+            <label for="vpass">Verify Password</label>
+        </td>
+        <td>
+            <input type="password"
+                    size="57"
+                    minlength="8"
+                    maxlength="30"
+                    id="vpass"
+                    name="Verify Password"
+                    required
+                    placeholder="********"
+				    title="Passwords must match."
+            >
+        <span id="vpass_text"></span>
+        </td>
+    </tr>
+	<tr class="form">
+		<td align="right">
+			<label for="rememberme">Remeber Me</label>
+		</td>
+		<td>
+			<input type="checkbox"
+				   id="rememberme"
+		</td>
+    </table>
+</div>
+<div class="center">
+<div class="heading">Reason for visit</div>
+<div class="column">
+        <div class="left">
+        <p>Please select one of the following for your visit</p>
+        <div class="group">
+            <input type="checkbox"
+                   id="option1"
+                   name="Checkup"
+                   value="Checkup"
+                   
+            >
+            <label for="option1">Checkup</label><br></div>
+        <div class="group">
+            <input  type="checkbox"
+                   id="option2"
+                   name="Vaccinations"
+                   value="Vaccinations"
+                   
+            >
+            <label for="option2">Vaccinations</label><br></div>
+        <div class="group">
+            <input type="checkbox" 
+                   id="option3" 
+                   name="Covid-19" 
+                   value="Covid-19"
+                   
+            >
+            <label for="option3">Covid-19</label><br></div>
+        <div class="group">
+            <input type="checkbox" 
+                   id="option4" 
+                   name="Strep Throat" 
+                   value="Strep Throat"
+                   
+            >
+            <label for="option4">Strep Throat</label><br></div>
+        <div class="group">
+            <input type="checkbox" 
+                   id="option5" 
+                   name="Other" 
+                   value="Other (Please specify)"
+                   
+            >
+            <label for="option5">Other (Please specify)</label>
+            <input type="text"
+                   id="option5_textarea"
+                   name="option5_textarea"
+                   size="20"
+            >
+        </div>
+    </div>
+<div class="right">
+<div class="group"> 
+        <label for="vacc">Have you been vaccinated?</label>
+            <input type="radio"
+                   id="vacc-yes"
+                   name="Vaccinated"
+                   value="Yes"
+                   
+            >
+            <label for="vacc-yes">Yes</label>
+            <input type="radio"
+                   id="vacc-no"
+                   name="Vaccinated"
+                   value="No"
+                   
+            >
+            <label for="vacc-no">No</label>
+            </div>
+            <div class="group">
+           <label for="insurance">Do you have insurance?</label>
+            <input type="radio"
+                   id="insurance-yes"
+                   name="Insurance"
+                   value="Yes"
+                   
+            >
+            <label for="insurance-yes">Yes</label>
+            <input type="radio"
+                   id="insurance-no"
+                   name="Insurance"
+                   value="No"
+                   
+            >
+            <label for="insurance-no">No</label>
+        </div>
+    </div>
+</div>
+<div class="center">
+<div class="slidecontainer">
+    <label for="pain">Pain Level</label>
+        <span>0</span>
+            <input type="range"
+                   min="0"
+                   max="10"
+                   value=""
+                   id="pain"
+                   name="Pain Level"
+                   class="slider"
+                   required
+            >
+        <span>10</span>
+        <p style="margin-top:10px;">Value: <span id="val"></span></p>
+</div>
+<div class="align-textarea">
+    <label for="detail">Please tell us any additional information you would like us to know</label>
+        <textarea id="detail" 
+                  name="Additional Information"
+                  rows="4"
+                  cols="50"
+        >
+        </textarea>
+</div>
+<div class="radio-button">
+    <input type="button"
+           id="review"
+           value="Review"
+           class="left-review"
+    >
+    <input type="submit"
+           value="Submit"
+           id="submit"
+           class="middle-submit"
+
+    >
+    <input type="reset"
+           value="Reset"
+           id="reset"
+           class="right-reset"
+    >
+</div>
+<div id="reviewoutput" class="reviewoutput"></div>
+</form>
+<footer class="footer">
+    <div style="display:flex; align:center;">
+    <div>
+        <p style="margin:0; font-weight:bold;">Houston Health & Wellness | <a href="https://www.bauer.uh.edu/" target="_blank" style="color:deepskyblue;">Contact Us</a></p>
+    </div>
+<div style="display:flex; align:center; gap:5px;">
+    <div class="footer-icons">
+        <a href="https://www.facebook.com/" target="_blank">
+        <img src="./Facebook-logo-blue-circle-large-transparent-png.png" 
+         alt="facebook"
+        >
+        </a>
+    </div>
+    <div class="footer-icons">
+        <a href="https://www.instagram.com/accounts/login/?hl=en" target="_blank">
+         <img src="./1600429.png"
+         alt="instagram"
+        >
+        </a>
+        </div>
+</footer>
+<script src="./Homework3.js"></script>
+</body>
+</html>
+    
+
+
+
+
+
+
+
+
+    
+
+
+
+                   
+
+
+
+
+            
