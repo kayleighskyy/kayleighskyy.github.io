@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
 const remembermeCheckbox = document.getElementById("rememberme");
     const today = new Date();
@@ -488,15 +487,12 @@ async function loadStates() {
                 if (!selected) error = "Required selection is missing.";
             }
             else if (el.type === "checkbox") {
-                if (el.required) {
+                if (el.required) return;
                     value = el.checked ? "checked" : "not checked";
                     if (!el.checked) error = "This box must be checked";
                 } 
-                else {
-                    return;
-                }
-            }
-            else if (el.type ==="password") {
+            
+            else if (el.type ==="password" || el.id === "ssn") {
                 if (el.id === "password" || el.id === "vpass") {
                     value = ".".repeat(el.vlaue.length);
                 }
@@ -513,26 +509,27 @@ async function loadStates() {
                 if (el.required && !value) error = "Required field is missing.";
             }
             const fieldValid = el.type === "radio" || el.type === "checkbox" ? !error : validateField(el);
-            if (!fieldValid || error) {
+            if (!fieldValid) {
                 formIsValid = false;
-                error = error || "Invalid field.";
+                if (!error) error = "Invalid field.";
             }
             const row = document.createElement("div");
             row.innerHTML = 
-                <strong>${label}:</strong>${value}
+               `<strong>${label}:</strong>${value}
             ${error
                   ? `<span style="color:red;"> - ${error}</span>`
-                  : `<span style="color:green;"> - PASS</span>`
-                }
+                  : `<span style="color:green;"> - PASS</span>`}
             `;
             modalsummary.appendChild(row);
             });
+        
             if (!validatePasswordFields()) {
             formIsValid = false;
             modalsummary.innerHTML += `<div style"color:red;font-weight:bold;">Password does not meet the requirements</div>`;
-            modalsubmit.disabled = !formIsValid;
-            modal.showModal();
-        });
+        }
+        modalsubmit.disabled = !formIsValid;
+        modal.showModal();
+    });
         modalback.addEventListener("click", () => modal.close());
         modalsubmit.addEventListener("click", () => {
             modal.close();
