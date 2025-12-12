@@ -530,7 +530,7 @@ async function loadStates() {
         modalsubmit.disabled = !formIsValid;
         modal.showModal();
     });
-        modalit.addEventListener("click", () => modal.close());
+        modaledit.addEventListener("click", () => modal.close());
         modalsubmit.addEventListener("click", () => {
             modal.close();
             form.submit();
