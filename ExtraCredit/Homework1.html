@@ -11,10 +11,10 @@
     <head>
         <title>Kayleigh's Extra Credit</title>
         <link rel="stylesheet" href="./Homework1.css">
-		<div id="Welcomemessage"></div>
-		<div id="Wrongusermessage"></div>
     </head>
     <body>
+		<div id="Welcomemessage"></div>
+		<div id="Wrongusermessage"></div>
         <div id="header">
             <table width="100%">
                 <tr>
@@ -40,7 +40,7 @@
     <div class="border">
     <table class="form">
     <tr class="form">
-        <div class="heading">Create Patient Profile</div>
+        <td colspan="2"><div class="heading">Create Patient Profile</div></td>
     </tr>
     <tr class="form">
         <td align="right">
@@ -148,7 +148,7 @@
                    placeholder="Zip"
 				   title="Zip can be 5 numbers (12345) or 9 numbers (12345-6789). Dash appears automatically."
             >
-            <span id="city_text"><span id="state_text"></span><span id="zip_text"></span>
+            <span id="city_text"></span><span id="state_text"></span><span id="zip_text"></span>
     </tr>
     <tr class="form">
         <td align="right">
@@ -464,7 +464,7 @@
         >
         </textarea>
 </div>
-<div class="radio-button">
+<div class="radio-button">	
     <input type="reset"
            value="Reset"
            id="reset"
@@ -472,8 +472,8 @@
     >
 </div>
 <div id="reviewoutput" class="reviewoutput"></div>
+<button id="reviewinfo" type="button" class="left-review">Review Information</button>
 </form>
-	<button id="reviewinfo" type="button" class="left-review">Review Information</button>
 <dialog id="reviewmodal">
 	<div id="modalsummary"></div>
 	<button id="modalbackbutton">Go back and edit your information</button>
