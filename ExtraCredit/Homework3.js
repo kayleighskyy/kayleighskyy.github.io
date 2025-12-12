@@ -214,59 +214,7 @@ const remembermeCheckbox = document.getElementById("rememberme");
             updateSubmitButton();
         });
     }
-    document.getElementById('review').addEventListener('click', function() {
-        const form = document.getElementById('wellnessform');
-        const output = document.getElementById('reviewoutput');
-        output.innerHTML = '';
-        const handledRadioGroups = new Set();
-
-        Array.from(form.elements).forEach(element => {
-            if (['button', 'submit', 'reset'].includes(element.type)) return;
-
-            let value = '';
-            let validationMessage = 'Pass';
-
-            if (element.type === 'radio') {
-                if (handledRadioGroups.has(element.name)) return;
-                const selected = form.querySelector(`input[name="${element.name}"]:checked`);
-                if (!selected) return;
-                value = selected.value;
-                handledRadioGroups.add(element.name);
-
-            }else if (element.type === 'checkbox') {
-                if (!element.checked) return;
-                value = 'Checked';
-
-            } else {
-                value = element.value.trim();
-                if (!value) return;
-            
-            if (['text', 'password', 'textarea', 'number', 'tel', 'email'].includes(element.type)){
-                if (element.minLength > 0 && value.length < element.minLength) {
-                    validationMessage = `error (min length ${element.minLength})`;
-            } else if (element.maxLength > 0 && value.length > element.maxLength) {
-                validationMessage = `error (max length ${element.maxLength})`;
-            } else if (element.pattern) {
-                const regex = new RegExp(`^${element.pattern}$`);
-                if (!regex.test(value)) validationMessage = 'error (invalid format)';
-            }
-        } 
-            if (element.id === 'vpass') {
-                const passwordElement = document.getElementById('password');
-                if (value !== passwordElement.value) validationMessage = 'error (password does not match)';
-            }
-        }
-            const displayValue = (element.type === 'password') ? '*'.repeat(value.length) : value;
-            const line = document.createElement('div');
-
-            line.textContent = validationMessage 
-                    ? `${element.name || element.id} : ${displayValue} ${validationMessage}` 
-                    : `${element.name || element.id} : ${displayValue}`;
-
-            line.style.color = validationMessage.startsWith('error') ? 'red' : 'green';
-            output.appendChild(line);
-        });
-    });
+    
     const resetButton = document.getElementById('reset');
     const reviewOutput = document.getElementById('reviewoutput');
     if (resetButton) {
