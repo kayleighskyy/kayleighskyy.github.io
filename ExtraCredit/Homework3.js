@@ -463,8 +463,7 @@ async function loadStates() {
     }
 }
    loadStates();
-document.addEventListener("DOMContentLoaded", () => {
-    const form = docuemnt.getElementById("wellnessform");
+
     const reviewbutton = document.getElementById("reviewinfo");
     const modal = document.getElementById("reviewmodal");
     const modalsummary = document.getElementById("modalsummary");
@@ -472,8 +471,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const modaledit = document.getElementById("modalbackbutton");
 
     reviewbutton.addEventListener("click", () => {
-        let formIsValid = true;
         modalsummary.innerHTML = "";
+        let formIsValid = true;
         const handledRadioGroups = new Set();
         Array.from(form.elements).forEach(el => {
             if (["button", "submit", "reset"].include(el.type)) return;
