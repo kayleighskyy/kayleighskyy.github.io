@@ -466,7 +466,7 @@ async function loadStates() {
     const reviewbutton = document.getElementById("reviewinfo");
     const modal = document.getElementById("reviewmodal");
     const modalsummary = document.getElementById("modalsummary");
-    const modalsubmit = docucment.getElementById("modalsubmitbutton");
+    const modalsubmit = document.getElementById("modalsubmitbutton");
     const modaledit = document.getElementById("modalbackbutton");
 
     reviewbutton.addEventListener("click", () => {
@@ -474,7 +474,7 @@ async function loadStates() {
         let formIsValid = true;
         const handledRadioGroups = new Set();
         Array.from(form.elements).forEach(el => {
-            if (["button", "submit", "reset"].include(el.type)) return;
+            if (["button", "submit", "reset"].includes(el.type)) return;
             let label = el.name || el.id || "field";
             let value = "";
             let error = "";
@@ -487,25 +487,25 @@ async function loadStates() {
                 if (!selected) error = "Required selection is missing.";
             }
             else if (el.type === "checkbox") {
-                if (el.required) return;
+                if (!el.required) return;
                     value = el.checked ? "checked" : "not checked";
                     if (!el.checked) error = "This box must be checked";
                 } 
             
             else if (el.type ==="password" || el.id === "ssn") {
                 if (el.id === "password" || el.id === "vpass") {
-                    value = ".".repeat(el.vlaue.length);
+                    value = ".".repeat(el.value.length);
                 }
                 else if (el.id === "ssn") {
                     const digits = el.value.replace(/\D/g, "");
-                    value = digits.length === 9 ? "***-**-" + digits.slice(-4) : "***-**-****":
+                    value = digits.length === 9 ? "***-**-" + digits.slice(-4) : "***-**-****";
                 }
             }
             else if (el.tagName === "textarea") {
-                value = "enterd";
+                value = "entered";
             }
             else {
-                vlaue = el.value.trim();
+                value = el.value.trim();
                 if (el.required && !value) error = "Required field is missing.";
             }
             const fieldValid = el.type === "radio" || el.type === "checkbox" ? !error : validateField(el);
@@ -525,12 +525,12 @@ async function loadStates() {
         
             if (!validatePasswordFields()) {
             formIsValid = false;
-            modalsummary.innerHTML += `<div style"color:red;font-weight:bold;">Password does not meet the requirements</div>`;
+            modalsummary.innerHTML += `<div style="color:red;font-weight:bold;">Password does not meet the requirements</div>`;
         }
         modalsubmit.disabled = !formIsValid;
         modal.showModal();
     });
-        modalback.addEventListener("click", () => modal.close());
+        modalit.addEventListener("click", () => modal.close());
         modalsubmit.addEventListener("click", () => {
             modal.close();
             form.submit();
